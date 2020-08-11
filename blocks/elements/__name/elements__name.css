@@ -9,3 +9,17 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+/*
+@media (max-width: 620px) {
+  .elements__name {
+    font-size: 3.87vw;
+  }
+}
+
+@media (max-width: 320px) {
+  .elements__name {
+    font-size: 7.5vw;
+  }
+}
+*/
