@@ -18,12 +18,12 @@ popupCloseButton.addEventListener('click', popupToggle);*/
 const popupOpen = function() {
   nameInput.value = finalname.textContent;
   profInput.value = finalprof.textContent;
-  popup.classList.add('popup_opened');
+  popup.classList.add('popup__opened');
 }
 
 
 const popupClose = function() {
-  popup.classList.remove('popup_opened');
+  popup.classList.remove('popup__opened');
 }
 
 popupOpenButton.addEventListener('click', popupOpen);
