@@ -1,10 +1,10 @@
-@import url(./__opened/popup__opened.css);
 @import url(./__container/popup__container.css);
 @import url(./__title/popup__title.css);
 @import url(./__close-button/popup__close-button.css);
 @import url(./__field-name/popup__field-name.css);
 @import url(./__profession/popup__profession.css);
 @import url(./__save-button/popup__save-button.css);
+@import url(./_opened/popup_opened.css);
 
 .popup {
   display: none;
@@ -15,4 +15,11 @@
   bottom: 0;
   background: rgba(0, 0, 0, .5);
   z-index: 10;
+}
+
+/*не могу разобраться - почему если делать по БЭМ - скрипт не находит модификатор и недобавляет его
+А если вставлять сюда - все нормально*/
+
+.popup_opened {
+  display: block;
 }
