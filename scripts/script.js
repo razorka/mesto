@@ -4,8 +4,8 @@ const popupCloseButton = document.querySelector('.popup__close-button');
 const popupSaveButton = document.querySelector('.popup__save-button');
 const finalname = document.querySelector('.profile__name');
 const finalprof = document.querySelector('.profile__profession');
-const nameInput = document.querySelector('.popup__field-name');
-const profInput = document.querySelector('.popup__profession');
+const nameInput = document.querySelector('.popup__field_name');
+const profInput = document.querySelector('.popup__field_profession');
 
 /*const popupToggle = function() {
   popup.classList.toggle('popup_opened');

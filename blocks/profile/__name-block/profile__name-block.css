@@ -1,3 +1,5 @@
 .profile__name-block {
   display: flex;
+  max-width: 336px;
+  width: 100%;
   }

@@ -7,9 +7,8 @@
     <title>Место</title>
   </head>
   <body class="page">
-     <header class="header">
-       <img src="./images/header_logo.svg" alt="Место" class="header__logo">
-       <!--<img src="./images/line_header.png" alt="Линия" class="header__line">-->
+    <header class="header">
+      <img src="./images/header_logo.svg" alt="Место" class="header__logo">
     </header>
     <main class="content">
       <section class="profile">
@@ -18,73 +17,54 @@
           <div class="profile__data">
             <div class="profile__name-block">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <img src="./images/profile_edit-button-image.svg" class="profile__edit-button" alt="Изменить">
+              <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"></button>
             </div>
             <p class="profile__profession">Исследователь океана</p>
           </div>
-          <!--<a href="#" class="profile__edit-button">
-            <img src="./images/profile_edit-button-image.svg" class="profile__edit-button-image" alt="Изменить">
-          </a>-->
-          <form class="popup">
-            <div class="popup__container">
-              <button type="button" class="popup__close-button" aria-label="Закрыть попап">
-              <!--<img src="./images/popup_close-button-image.svg" alt="Закрыть окно" class="popup__close-button-image">-->
-              </button>
-              <h2 class="popup__title">Редактировать профиль</h2>
-              <input type="text" placeholder="Жак-Ив Кусто" class="popup__field-name">
-              <input type="text" placeholder="Исследователь океана" class="popup__profession">
-              <button type="button" class="popup__save-button" aria-label="Сохранить данные">Сохранить
-                <!--<img src="./images/popup_save-button-image.png" alt="Сохранить данные" class="popup__save-button-image">-->
-              </button>
-
-            </div>
-          </form>
         </div>
-        <button type="button" class="profile__submit-button" aria-label="Кнопка отправки">
-          <!--<img src="./images/profile_submit-button.png" alt="Кнопка_Подтвердить" class="profile__submit-button-image">-->
-        </button>
+        <button type="button" class="profile__submit-button" aria-label="Кнопка отправки"></button>
       </section>
       <section class="elements">
         <div class="elements__item">
           <img src="./images/elements_karachaevsk-image.png" alt="Карачаевск" class="elements__image">
           <div class="elements__info">
-            <p class="elements__name">Карачаевск</p>
-            <img src="./images/elements_like-button.svg" alt="Кнопка Понравилось" class="elements__like-button">
+            <h2 class="elements__name">Карачаевск</h2>
+            <button type="button" class="elements__like-button" aria-label="Кнопка Понравилось"></button>
           </div>
         </div>
         <div class="elements__item">
           <img src="./images/pestravka_image.jpg" alt="Пестравка" class="elements__image">
           <div class="elements__info">
-            <p class="elements__name">Пестравка</p>
-            <img src="./images/elements_like-button.svg" alt="Кнопка Понравилось" class="elements__like-button">
+            <h2 class="elements__name">Пестравка</h2>
+            <button type="button" class="elements__like-button" aria-label="Кнопка Понравилось"></button>
           </div>
         </div>
         <div class="elements__item">
           <img src="./images/samara_river.jpg" alt="Набережная Самара" class="elements__image">
           <div class="elements__info">
-            <p class="elements__name">Набережная Самара</p>
-            <img src="./images/elements_like-button.svg" alt="Кнопка Понравилось" class="elements__like-button">
+            <h2 class="elements__name">Набережная Самара</h2>
+            <button type="button" class="elements__like-button" aria-label="Кнопка Понравилось"></button>
           </div>
         </div>
         <div class="elements__item">
           <img src="./images/Park_samara.jpg" alt="Парк Самара" class="elements__image">
           <div class="elements__info">
-            <p class="elements__name">Парки Самары</p>
-            <img src="./images/elements_like-button.svg" alt="Кнопка Понравилось" class="elements__like-button">
+            <h2 class="elements__name">Парки Самары</h2>
+            <button type="button" class="elements__like-button" aria-label="Кнопка Понравилось"></button>
           </div>
         </div>
         <div class="elements__item">
           <img src="./images/vokzal_samara.jpg" alt="Вокзал Самара" class="elements__image">
           <div class="elements__info">
-            <p class="elements__name">Вокзал Самара</p>
-            <img src="./images/elements_like-button.svg" alt="Кнопка Понравилось" class="elements__like-button">
+            <h2 class="elements__name">Вокзал Самара</h2>
+            <button type="button" class="elements__like-button" aria-label="Кнопка Понравилось"></button>
           </div>
         </div>
         <div class="elements__item">
           <img src="./images/garibaldi_image.jpg" alt="Замок Гарибальди" class="elements__image">
           <div class="elements__info">
-            <p class="elements__name">Замок Гарибальди</p>
-            <img src="./images/elements_like-button.svg" alt="Кнопка Понравилось" class="elements__like-button">
+            <h2 class="elements__name">Замок Гарибальди</h2>
+            <button type="button" class="elements__like-button" aria-label="Кнопка Понравилось"></button>
           </div>
         </div>
       </section>
@@ -92,6 +72,14 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
+    <section class="popup">
+       <form name="popup-container" class="popup__container">Редактировать профиль
+        <button type="button" class="popup__close-button" aria-label="Закрыть попап"></button>
+        <input type="text" name="name_information" placeholder="Жак-Ив Кусто" class="popup__field popup__field_name">
+        <input type="text" name="profession_information" placeholder="Исследователь океана" class="popup__field popup__field_profession">
+        <button type="submit" class="popup__save-button" aria-label="Сохранить данные">Сохранить</button>
+      </form>
+    </section>
     <script src="./scripts/script.js"></script>
   </body>
 </html>

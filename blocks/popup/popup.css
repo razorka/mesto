@@ -1,10 +1,11 @@
 @import url(./__container/popup__container.css);
-@import url(./__title/popup__title.css);
 @import url(./__close-button/popup__close-button.css);
-@import url(./__field-name/popup__field-name.css);
-@import url(./__profession/popup__profession.css);
 @import url(./__save-button/popup__save-button.css);
+@import url(./__field/popup__field.css);
 @import url(./_opened/popup_opened.css);
+@import url(./__field/_name/popup__field_name.css);
+@import url(./__field/_profession/popup__field_profession.css);
+
 
 .popup {
   display: none;
