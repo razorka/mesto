@@ -1,0 +1,10 @@
+.element__card {
+  max-width: 282px;
+  width: 100%;
+  min-height: 362px;
+  height: 100%;
+  background: white;
+  border-radius: 10px;
+  margin: 0 auto;
+  overflow: hidden;
+}

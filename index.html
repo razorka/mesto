@@ -25,7 +25,20 @@
         <button type="button" class="profile__submit-button" aria-label="Кнопка отправки"></button>
       </section>
       <section class="elements">
-        <div class="elements__item">
+        <ul class="elements__list">
+        </ul>
+      </section>
+        <template id="element">
+          <div class="element">
+             <img src="" class="element__image" alt="">
+             <div class="element__info">
+                <h2 class="element__name"></h2>
+                <button class="element__like-button"></button>
+             </div>
+          </div>
+       </template>
+
+        <!--<div class="elements__item">
           <img src="./images/elements_karachaevsk-image.png" alt="Карачаевск" class="elements__image">
           <div class="elements__info">
             <h2 class="elements__name">Карачаевск</h2>
@@ -67,7 +80,7 @@
             <button type="button" class="elements__like-button" aria-label="Кнопка Понравилось"></button>
           </div>
         </div>
-      </section>
+      </section>-->
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
