@@ -5,6 +5,8 @@
 @import url(./_opened/popup_opened.css);
 @import url(./__field/_name/popup__field_name.css);
 @import url(./__field/_profession/popup__field_profession.css);
+@import url(./__field/_place-name/popup__field_place-name.css);
+@import url(./__field/_place-link/popup__field_place-link.css);
 
 
 .popup {

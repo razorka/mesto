@@ -37,62 +37,26 @@
              </div>
           </div>
        </template>
-
-        <!--<div class="elements__item">
-          <img src="./images/elements_karachaevsk-image.png" alt="Карачаевск" class="elements__image">
-          <div class="elements__info">
-            <h2 class="elements__name">Карачаевск</h2>
-            <button type="button" class="elements__like-button" aria-label="Кнопка Понравилось"></button>
-          </div>
-        </div>
-        <div class="elements__item">
-          <img src="./images/pestravka_image.jpg" alt="Пестравка" class="elements__image">
-          <div class="elements__info">
-            <h2 class="elements__name">Пестравка</h2>
-            <button type="button" class="elements__like-button" aria-label="Кнопка Понравилось"></button>
-          </div>
-        </div>
-        <div class="elements__item">
-          <img src="./images/samara_river.jpg" alt="Набережная Самара" class="elements__image">
-          <div class="elements__info">
-            <h2 class="elements__name">Набережная Самара</h2>
-            <button type="button" class="elements__like-button" aria-label="Кнопка Понравилось"></button>
-          </div>
-        </div>
-        <div class="elements__item">
-          <img src="./images/Park_samara.jpg" alt="Парк Самара" class="elements__image">
-          <div class="elements__info">
-            <h2 class="elements__name">Парки Самары</h2>
-            <button type="button" class="elements__like-button" aria-label="Кнопка Понравилось"></button>
-          </div>
-        </div>
-        <div class="elements__item">
-          <img src="./images/vokzal_samara.jpg" alt="Вокзал Самара" class="elements__image">
-          <div class="elements__info">
-            <h2 class="elements__name">Вокзал Самара</h2>
-            <button type="button" class="elements__like-button" aria-label="Кнопка Понравилось"></button>
-          </div>
-        </div>
-        <div class="elements__item">
-          <img src="./images/garibaldi_image.jpg" alt="Замок Гарибальди" class="elements__image">
-          <div class="elements__info">
-            <h2 class="elements__name">Замок Гарибальди</h2>
-            <button type="button" class="elements__like-button" aria-label="Кнопка Понравилось"></button>
-          </div>
-        </div>
-      </section>-->
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <section class="popup">
+    <section class="popup" id="profile-popup">
        <form name="popup-container" class="popup__container">Редактировать профиль
-        <button type="button" class="popup__close-button" aria-label="Закрыть попап"></button>
+        <button type="button" id="profile-close-button" class="popup__close-button" aria-label="Закрыть попап"></button>
         <input type="text" name="name_information" placeholder="Жак-Ив Кусто" class="popup__field popup__field_name">
         <input type="text" name="profession_information" placeholder="Исследователь океана" class="popup__field popup__field_profession">
-        <button type="submit" class="popup__save-button" aria-label="Сохранить данные">Сохранить</button>
+        <button type="submit" id="profile-save-button" class="popup__save-button" aria-label="Сохранить данные">Сохранить</button>
       </form>
     </section>
+    <section class="popup" id="card-popup">
+      <form name="popup-container-place" class="popup__container">Новое место
+       <button type="button" id="cards-close-button" class="popup__close-button" aria-label="Закрыть попап"></button>
+       <input type="text" name="place_name" placeholder="Название" class="popup__field popup__field_place-name">
+       <input type="text" name="place_link" placeholder="Ссылка на картинку" class="popup__field popup__field_place-link">
+       <button type="submit" id="cards-save-button" class="popup__save-button" aria-label="Сохранить данные">Сохранить</button>
+     </form>
+   </section>
     <script src="./scripts/script.js"></script>
   </body>
 </html>

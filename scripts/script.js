@@ -1,34 +1,34 @@
-const popup = document.querySelector('.popup');
-const popupOpenButton = document.querySelector('.profile__edit-button');
-const popupCloseButton = document.querySelector('.popup__close-button');
-const popupSaveButton = document.querySelector('.popup__save-button');
+let popupProfile = document.querySelector('#profile-popup');
+let popupCards = document.querySelector('#card-popup');
+let popupProfileOpenButton = document.querySelector('.profile__edit-button');
+let popupCardsOpenButton = document.querySelector('.profile__submit-button');
+let popupProfileCloseButton = document.querySelector('#profile-close-button');
+let popupSaveProfileButton = document.querySelector('#profile-save-button');
+let popupCardsCloseButton = document.querySelector('#cards-close-button');
+let popupSaveCardsButton = document.querySelector('#cards-save-button');
 const finalname = document.querySelector('.profile__name');
 const finalprof = document.querySelector('.profile__profession');
 const nameInput = document.querySelector('.popup__field_name');
 const profInput = document.querySelector('.popup__field_profession');
+const placeName = document.querySelector('.popup__field_place-name');
+const placeLink = document.querySelector('.popup__field_place-link');
 
-/*const popupToggle = function() {
-  popup.classList.toggle('popup_opened');
-}
-
-popupOpenButton.addEventListener('click', popupToggle);
-popupCloseButton.addEventListener('click', popupToggle);*/
-
-const popupOpen = function() {
+//Функция открытия попапа Редактирования профиля.
+const popupProfileOpen = function() {
   nameInput.value = finalname.textContent;
   profInput.value = finalprof.textContent;
-  popup.classList.add('popup_opened');
+  popupProfile.classList.add('popup_opened');
   console.log('Открыл? - значит работаю!')
 }
 
 
-const popupClose = function() {
-  popup.classList.remove('popup_opened');
+const popupProfileClose = function() {
+  popupProfile.classList.remove('popup_opened');
   console.log('Закрыл? - значит работаю!')
 }
 
-popupOpenButton.addEventListener('click', popupOpen);
-popupCloseButton.addEventListener('click', popupClose);
+popupProfileOpenButton.addEventListener('click', popupProfileOpen);
+popupProfileCloseButton.addEventListener('click', popupProfileClose);
 
 
 
@@ -36,11 +36,42 @@ function editProfile(evt) {
   evt.preventDefault();
   finalname.textContent = nameInput.value;
   finalprof.textContent = profInput.value;
-  popupClose();
+  popupProfileClose();
   console.log('Сохранил? Значит работаю!')
 }
 
-popupSaveButton.addEventListener('click', editProfile);
+popupSaveProfileButton.addEventListener('click', editProfile);
+
+const popupCardsOpen = function() {
+  placeName.value = placeName.textContent;
+  placeLink.value = placeLink.textContent;
+  popupCards.classList.add('popup_opened');
+  console.log('Открыл? - значит работаю!')
+}
+
+const popupCardsClose = function() {
+  popupCards.classList.remove('popup_opened');
+  console.log('Закрыл? - значит работаю!')
+}
+
+popupCardsOpenButton.addEventListener('click', popupCardsOpen);
+popupCardsCloseButton.addEventListener('click', popupCardsClose);
+
+
+function AddAndSaveCard(evt) {
+  evt.preventDefault();
+  const newElement = {
+    name:(placeName.value),
+    link:(placeLink.value)
+    }
+  initialCards.unshift(newElement);
+  const newTemplate = CardTemplate(newElement.link, newElement.name);
+  elementList.prepend(newTemplate);
+  popupCardsClose();
+}
+popupSaveCardsButton.addEventListener('click', AddAndSaveCard);
+
+
 
 
 //1. Выбрал блок добавления элементов
@@ -80,23 +111,60 @@ function addCardsStart() {
   //Определяем каждый элемент со свойствами в имеющемся массиве,
   //и с помощью новой функции добавляем последовательно в конец секции
   // с карточками новые элементы со свойствами из массива.
-  initialCards.forEach(function (element) {
-    // Определяем свойства
-    const cardLink = element.link;
-    const cardName = element.name;
-    //функция присваивания свойств карточке
-    function CardInfo(link, name) {
-      const elementCardTemplate = document.querySelector('#element').content.cloneNode(true);
-      console.log(elementCardTemplate);
 
-      elementCardTemplate.querySelector('.element__image').src = link;
-      elementCardTemplate.querySelector('.element__image').alt = 'Фото' + name;
-      elementCardTemplate.querySelector('.element__name').textContent = name;
+  const templates = initialCards.map(function newCard(element) {
+     // Определяем свойства
 
-      return elementCardTemplate;
-      }
-    // Добавляем карточки в секцию
-    elementList.append(CardInfo(cardLink, cardName));
+     const cardLink = element.link;
+     const cardName = element.name;
+    return CardTemplate(cardLink, cardName);
   })
+ for(const index in templates) {
+   elementList.append(templates[index])
+ }
 }
 addCardsStart();
+
+
+
+//функция присваивания свойств карточке
+function CardTemplate(link, name) {
+  const elementCardTemplate = document.querySelector('#element').content.cloneNode(true);
+  console.log(elementCardTemplate);
+
+  elementCardTemplate.querySelector('.element__image').src = link;
+  elementCardTemplate.querySelector('.element__image').alt = 'Фото' + name;
+  elementCardTemplate.querySelector('.element__name').textContent = name;
+
+  return elementCardTemplate;
+  }
+
+
+
+
+
+  /*function addCardsStart() {
+    //Определяем каждый элемент со свойствами в имеющемся массиве,
+    //и с помощью новой функции добавляем последовательно в конец секции
+    // с карточками новые элементы со свойствами из массива.
+    initialCards.forEach(function (element) {
+      // Определяем свойства
+      const cardLink = element.link;
+      const cardName = element.name;
+      //функция присваивания свойств карточке
+      function CardInfo(link, name) {
+        const elementCardTemplate = document.querySelector('#element').content.cloneNode(true);
+        console.log(elementCardTemplate);
+
+        elementCardTemplate.querySelector('.element__image').src = link;
+        elementCardTemplate.querySelector('.element__image').alt = 'Фото' + name;
+        elementCardTemplate.querySelector('.element__name').textContent = name;
+
+        return elementCardTemplate;
+        }
+      // Добавляем карточки в секцию
+      elementList.append(CardInfo(cardLink, cardName));
+    })
+  }
+  addCardsStart();*/
+
