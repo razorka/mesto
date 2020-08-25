@@ -2,15 +2,18 @@
 @import url(./__close-button/popup__close-button.css);
 @import url(./__save-button/popup__save-button.css);
 @import url(./__field/popup__field.css);
-@import url(./_opened/popup_opened.css);
 @import url(./__field/_name/popup__field_name.css);
 @import url(./__field/_profession/popup__field_profession.css);
 @import url(./__field/_place-name/popup__field_place-name.css);
 @import url(./__field/_place-link/popup__field_place-link.css);
-
+@import url(./__image/popup__image.css);
+@import url(./_opened/popup_opened.css);
+@import url(./_hidden/popup_hidden.css);
 
 .popup {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s linear;
   position: fixed;
   top: 0;
   left: 0;
@@ -24,5 +27,15 @@
 А если вставлять сюда - все нормально*/
 
 .popup_opened {
-  display: block;
+  visibility: visible;
+  opacity: 1;
 }
+
+.popup_hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s linear;
+}
+
+
+

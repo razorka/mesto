@@ -1,12 +1,12 @@
-let popupProfile = document.querySelector('#profile-popup');
-let popupCards = document.querySelector('#card-popup');
-let popupProfileOpenButton = document.querySelector('.profile__edit-button');
-let popupCardsOpenButton = document.querySelector('.profile__submit-button');
-let popupProfileCloseButton = document.querySelector('#profile-close-button');
-let popupSaveProfileButton = document.querySelector('#profile-save-button');
-let popupCardsCloseButton = document.querySelector('#cards-close-button');
-let popupSaveCardsButton = document.querySelector('#cards-save-button');
-//let deleteCardButton = document.querySelector('.element__delete-button')
+const popupProfile = document.querySelector('#profile-popup');
+const popupCards = document.querySelector('#card-popup');
+const popupProfileOpenButton = document.querySelector('.profile__edit-button');
+const popupCardsOpenButton = document.querySelector('.profile__submit-button');
+const popupProfileCloseButton = document.querySelector('#profile-close-button');
+const popupSaveProfileButton = document.querySelector('#profile-save-button');
+const popupCardsCloseButton = document.querySelector('#cards-close-button');
+const popupSaveCardsButton = document.querySelector('#cards-save-button');
+//const deleteCardButton = document.querySelector('.element__delete-button')
 //const likeButton = document.querySelector('.element__like-button');
 const finalname = document.querySelector('.profile__name');
 const finalprof = document.querySelector('.profile__profession');
@@ -92,27 +92,9 @@ const initialCards = [
   }
 ];
 
-//5. Создадим функцию стартового добавления карточек в блок.
-
-function addCardsStart() {
-  const templates = initialCards.map(function newCard(element) {    //Определяем переменную, которая выполняет перебор массива с созданием нового массива из данных элементов первоначального массива
-    const cardLink = element.link;                                  //Назначаем переменную с данными по ссылке из массива
-    const cardName = element.name;                                  //Назначаем переменную с данными по имени из массива
-    return CardTemplate(cardLink, cardName);                        //Возвращаем (формируем, отображаем) с помощью функции, которая формирует карточку, элемент из массива с данными из переменных.
-  })
-
-  for (let i = 0; i < initialCards.length; i=i+1) {                //создаем цикл, который будет последовательно добавлять элементы template друг за другом с шагом 1
-    elementList.append(templates[i]);
-}
-
-}
-addCardsStart();      //Запускаем функцию и добавляем карточки на страницу - только те, получается, что в первоначальном массиве есть.
-
-
 //Функция создания карточки - в функцию мы в качестве параметров передаем переменные ссылки и имени из массива
 function CardTemplate(link, name) { // создаем функцию с параметрами - ссылка и имя - а в функциях выше получается мы определяем эти параметры - cardName и cardLink
   const elementCardTemplate = document.querySelector('#element').content.cloneNode(true); // назначаем переменную - выбирамес template, открываем содержимое, клонируем для добавления
-  console.log(elementCardTemplate);
 
   elementCardTemplate.querySelector('.element__image').src = link; // присваиваем первое свойство - ссылку - а потом мы этому свойству передаем уже cardLink
   elementCardTemplate.querySelector('.element__image').alt = 'Фото' + name; // альтернативный текст
@@ -129,8 +111,46 @@ function CardTemplate(link, name) { // создаем функцию с пара
     console.log('Лайкнул? - значит работаю!')
   });
 
+  const popupImage = document.querySelector('#screen-image');
+  const popupImageOpen = elementCardTemplate.querySelector('.element__image');
+  const popupFullImage = popupImage.querySelector('.element__image-screen');
+  const popupImageName = popupImage.querySelector('.element__image-name');
+  popupImageOpen.addEventListener('click', function(){
+    popupImage.classList.add('popup_opened');
+    popupFullImage.src = link;
+    popupImageName.textContent = name;
+  });
+
+  const popupImageClose = document.querySelector('#screen-close-button');
+  popupImageClose.addEventListener('click', function(){
+    popupImage.classList.remove('popup_opened');
+  });
+
+
+  //const imageItem = document.querySelector('.element__image-screen');
+  //imageItem.src = elementCardTemplate.querySelector('.element__image').src;
+
+
+
   return elementCardTemplate; // возвращаем(выдаем) элемент - template с параметрами link и name
   }
+
+
+  //5. Создадим функцию стартового добавления карточек в блок.
+
+function addCardsStart() {
+  const templates = initialCards.map(function newCard(element) {    //Определяем переменную, которая выполняет перебор массива с созданием нового массива из данных элементов первоначального массива
+    const cardLink = element.link;                                  //Назначаем переменную с данными по ссылке из массива
+    const cardName = element.name;                                  //Назначаем переменную с данными по имени из массива
+    return CardTemplate(cardLink, cardName);                        //Возвращаем (формируем, отображаем) с помощью функции, которая формирует карточку, элемент из массива с данными из переменных.
+  })
+
+  for (let i = 0; i < initialCards.length; i=i+1) {                //создаем цикл, который будет последовательно добавлять элементы template друг за другом с шагом 1
+    elementList.append(templates[i]);
+}
+
+}
+addCardsStart();      //Запускаем функцию и добавляем карточки на страницу - только те, получается, что в первоначальном массиве есть.
 
 
 
@@ -146,133 +166,3 @@ function CardTemplate(link, name) { // создаем функцию с пара
     popupCardsClose();    //закрываем попап
   }
   popupSaveCardsButton.addEventListener('click', AddAndSaveCard);   //добавляем событие "клик" для сохранения и закрытия попапа
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*function addCardsStart() {
-    //Определяем каждый элемент со свойствами в имеющемся массиве,
-    //и с помощью новой функции добавляем последовательно в конец секции
-    // с карточками новые элементы со свойствами из массива.
-    initialCards.forEach(function (element) {
-      // Определяем свойства
-      const cardLink = element.link;
-      const cardName = element.name;
-      //функция присваивания свойств карточке
-      function CardInfo(link, name) {
-        const elementCardTemplate = document.querySelector('#element').content.cloneNode(true);
-        console.log(elementCardTemplate);
-
-        elementCardTemplate.querySelector('.element__image').src = link;
-        elementCardTemplate.querySelector('.element__image').alt = 'Фото' + name;
-        elementCardTemplate.querySelector('.element__name').textContent = name;
-
-        return elementCardTemplate;
-        }
-      // Добавляем карточки в секцию
-      elementList.append(CardInfo(cardLink, cardName));
-    })
-  }
-  addCardsStart();*/
-
-  //for(const index in templates) {
-  // elementList.append(templates[index])
- //}
-
