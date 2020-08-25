@@ -4,6 +4,7 @@
 @import url(./__name/element__name.css);
 @import url(./__info/element__info.css);
 @import url(./__delete-button/element__delete-button.css);
+@import url(./__image-screen/element__image-screen.css);
 @import url(./__like-button/_active/element__like-button_active.css);
 @import url(./__image-name/element__image-name.css);
 

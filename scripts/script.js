@@ -111,11 +111,11 @@ function CardTemplate(link, name) { // создаем функцию с пара
     console.log('Лайкнул? - значит работаю!')
   });
 
-  const popupImage = document.querySelector('#screen-image');
-  const popupImageOpen = elementCardTemplate.querySelector('.element__image');
-  const popupFullImage = popupImage.querySelector('.element__image-screen');
-  const popupImageName = popupImage.querySelector('.element__image-name');
-  popupImageOpen.addEventListener('click', function(){
+  const popupImage = document.querySelector('#screen-image');                     //определил попап
+  const popupImageOpen = elementCardTemplate.querySelector('.element__image');    //определил картинку, на которую похэе нафешу обработчик события
+  const popupFullImage = popupImage.querySelector('.element__image-screen');      // определил место картинки в попапе
+  const popupImageName = popupImage.querySelector('.element__image-name');        // подпись к картинке
+  popupImageOpen.addEventListener('click', function(){                            //функция открытия, и присванивания адреса и подписи к картинке
     popupImage.classList.add('popup_opened');
     popupFullImage.src = link;
     popupImageName.textContent = name;
@@ -125,12 +125,6 @@ function CardTemplate(link, name) { // создаем функцию с пара
   popupImageClose.addEventListener('click', function(){
     popupImage.classList.remove('popup_opened');
   });
-
-
-  //const imageItem = document.querySelector('.element__image-screen');
-  //imageItem.src = elementCardTemplate.querySelector('.element__image').src;
-
-
 
   return elementCardTemplate; // возвращаем(выдаем) элемент - template с параметрами link и name
   }
@@ -147,22 +141,20 @@ function addCardsStart() {
 
   for (let i = 0; i < initialCards.length; i=i+1) {                //создаем цикл, который будет последовательно добавлять элементы template друг за другом с шагом 1
     elementList.append(templates[i]);
-}
+  }
 
 }
 addCardsStart();      //Запускаем функцию и добавляем карточки на страницу - только те, получается, что в первоначальном массиве есть.
 
-
-
-  function AddAndSaveCard(evt) {
-    evt.preventDefault(); // останавливаем всплывающее событие - чтобы дальше функции ничего не пошло - как я это понял
-    const newElement = {    //создаем переменную-элемент с новыми свойствами name и link - в них сохраняются введенные пользователем данные
-      name:(placeName.value),
-      link:(placeLink.value)
-      }
-    initialCards.unshift(newElement); // добавляем новый элемент в массив в начало
-    const newTemplate = CardTemplate(newElement.link, newElement.name); // создаем переменную - новую карточку с данными из переменной newElement
-    elementList.prepend(newTemplate);   //добавляем новую карточку в блок с карточками в начало.
-    popupCardsClose();    //закрываем попап
+function AddAndSaveCard(evt) {
+  evt.preventDefault(); // останавливаем всплывающее событие - чтобы дальше функции ничего не пошло - как я это понял
+  const newElement = {    //создаем переменную-элемент с новыми свойствами name и link - в них сохраняются введенные пользователем данные
+    name:(placeName.value),
+    link:(placeLink.value)
   }
-  popupSaveCardsButton.addEventListener('click', AddAndSaveCard);   //добавляем событие "клик" для сохранения и закрытия попапа
+  initialCards.unshift(newElement); // добавляем новый элемент в массив в начало
+  const newTemplate = CardTemplate(newElement.link, newElement.name); // создаем переменную - новую карточку с данными из переменной newElement
+  elementList.prepend(newTemplate);   //добавляем новую карточку в блок с карточками в начало.
+  popupCardsClose();    //закрываем попап
+}
+popupSaveCardsButton.addEventListener('click', AddAndSaveCard);   //добавляем событие "клик" для сохранения и закрытия попапа
