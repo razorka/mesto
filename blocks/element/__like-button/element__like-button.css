@@ -11,3 +11,7 @@
   opacity: 0.6;
   transition: 0.5s linear;
 }
+
+.element__like-button_active {
+  background: url(../../../../images/like-button_active.svg) center no-repeat;
+}

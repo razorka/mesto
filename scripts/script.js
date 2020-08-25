@@ -6,7 +6,8 @@ let popupProfileCloseButton = document.querySelector('#profile-close-button');
 let popupSaveProfileButton = document.querySelector('#profile-save-button');
 let popupCardsCloseButton = document.querySelector('#cards-close-button');
 let popupSaveCardsButton = document.querySelector('#cards-save-button');
-let deleteCardButton = document.querySelector('.element__delete-button')
+//let deleteCardButton = document.querySelector('.element__delete-button')
+//const likeButton = document.querySelector('.element__like-button');
 const finalname = document.querySelector('.profile__name');
 const finalprof = document.querySelector('.profile__profession');
 const nameInput = document.querySelector('.popup__field_name');
@@ -117,6 +118,17 @@ function CardTemplate(link, name) { // создаем функцию с пара
   elementCardTemplate.querySelector('.element__image').alt = 'Фото' + name; // альтернативный текст
   elementCardTemplate.querySelector('.element__name').textContent = name; // присваиваем второе свойство - имя - а потом мы этому свойству передаем уже cardName
 
+  const deleteCardButton = elementCardTemplate.querySelector('.element__delete-button');  // именно тут, потому что элемент создается здесь и ищем в элементе template, а не в HTML определяем кнопку удаления карточки
+  deleteCardButton.addEventListener('click', function(evt) {                      // делаем обработчик события на удаление карточки по клику
+    evt.target.parentNode.remove();                                               //удаляем родительский элемент
+  });
+
+  const likeButton = elementCardTemplate.querySelector('.element__like-button');
+  likeButton.addEventListener('click', function(){
+    likeButton.classList.toggle('element__like-button_active');
+    console.log('Лайкнул? - значит работаю!')
+  });
+
   return elementCardTemplate; // возвращаем(выдаем) элемент - template с параметрами link и name
   }
 
@@ -134,20 +146,6 @@ function CardTemplate(link, name) { // создаем функцию с пара
     popupCardsClose();    //закрываем попап
   }
   popupSaveCardsButton.addEventListener('click', AddAndSaveCard);   //добавляем событие "клик" для сохранения и закрытия попапа
-
-//функция удаления карточки
-  deleteCardButton.addEventListener('click', function(evt) {
-    evt.preventDefault();
-    evt.target.remove('#element');
-
-    //const Item = deleteCardButton.closest('#element');
-    //Item.remove();
-  });
-
-
-
-
-
 
 
 
