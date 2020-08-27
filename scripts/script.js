@@ -12,6 +12,7 @@ const nameInput = document.querySelector('.popup__field_name');
 const profInput = document.querySelector('.popup__field_profession');
 const placeNameInput = document.querySelector('.popup__field_place-name');
 const placeLinkInput = document.querySelector('.popup__field_place-link');
+const elementList = document.querySelector('.elements__list');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -22,20 +23,16 @@ function closePopup(popup) {
 }
 
 //1. Переменная с Функцией открытия попапа Редактирования профиля.
-const openProfilePopup = function() {
+function openProfilePopup() {
   nameInput.value = userName.textContent;
   profInput.value = userProfession.textContent;
   openPopup(popupProfile);
 }
 
 //1.1 Переменная с Функцией закрытия попапа Редактирования профиля.
-const closeProfilePopup = function() {
+function closeProfilePopup() {
   closePopup(popupProfile);
 }
-
-popupProfileOpenButton.addEventListener('click', openProfilePopup);
-popupProfileCloseButton.addEventListener('click', closeProfilePopup);
-
 
 //1.2 Функция редактирования и сохранения данных профиля.
 function editProfile(evt) {
@@ -45,92 +42,57 @@ function editProfile(evt) {
   closeProfilePopup();
 }
 
-popupSaveProfileButton.addEventListener('click', editProfile);
-
 //2 Функция открытия попапа для добавления карточек.
-const openAddCardPopup = function() {
+function openAddCardPopup() {
   placeNameInput.value = placeNameInput.textContent;
   placeLinkInput.value = placeLinkInput.textContent;
-  openPopup(popupAddCard);;
+  openPopup(popupAddCard);
 }
 
 //2.1 Функция закрытия попапа для добавления карточек.
-const closeAddCardPopup = function() {
+function closeAddCardPopup() {
   closePopup(popupAddCard);
 }
 
-popupCardsOpenButton.addEventListener('click', openAddCardPopup);
-popupCardsCloseButton.addEventListener('click', closeAddCardPopup);
-//3. Выбрал блок добавления элементов
-const elementList = document.querySelector('.elements__list');
-
-//4. Определяем массив с карточками.
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 //Функция создания карточки - в функцию мы в качестве параметров передаем переменные ссылки и имени из массива
 function createCard(link, name) {
-  const elementCardTemplate = document.querySelector('.card').content.cloneNode(true);
-  const cardImage = elementCardTemplate.querySelector('.element__image');
+  const card = document.querySelector('.card').content.cloneNode(true);
+  const cardImage = card.querySelector('.element__image');
   cardImage.src = link;
   cardImage.alt = 'Фото' + name;
-  elementCardTemplate.querySelector('.element__name').textContent = name;
+  card.querySelector('.element__name').textContent = name;
 
-  const deleteCardButton = elementCardTemplate.querySelector('.element__delete-button');
+  const deleteCardButton = card.querySelector('.element__delete-button');
   deleteCardButton.addEventListener('click', function(evt) {
     evt.target.parentNode.remove();
   });
 
-  const likeButton = elementCardTemplate.querySelector('.element__like-button');
+  const likeButton = card.querySelector('.element__like-button');
   likeButton.addEventListener('click', function(){
     likeButton.classList.toggle('element__like-button_active');
   });
 
+  cardImage.addEventListener('click', openFullImage);
+
   const popupImage = document.querySelector('.popup_image');
   const popupFullImage = popupImage.querySelector('.element__image-screen');
   const popupImageName = popupImage.querySelector('.element__image-name');
-  cardImage.addEventListener('click', function(){
+   function openFullImage(){
     openPopup(popupImage);
     popupFullImage.src = link;
     popupImageName.alt = 'Фото' + name;
     popupImageName.textContent = name;
-  });
+  };
 
   const popupImageClose = document.querySelector('.popup__close-button_image');
   popupImageClose.addEventListener('click', function(){
    closePopup(popupImage);
   });
 
-  return elementCardTemplate;
+  return card;
   }
 
-
   //5. Создадим функцию стартового добавления карточек в блок.
-
 function initCards() {
   initialCards.forEach((element) => {
     const cardLink = element.link;
@@ -151,4 +113,11 @@ function saveCard(evt) {
   elementList.prepend(newTemplate);
   closeAddCardPopup();
 }
+
+popupProfileOpenButton.addEventListener('click', openProfilePopup);
+popupProfileCloseButton.addEventListener('click', closeProfilePopup);
+popupSaveProfileButton.addEventListener('click', editProfile);
+popupCardsOpenButton.addEventListener('click', openAddCardPopup);
+popupCardsCloseButton.addEventListener('click', closeAddCardPopup);
 popupSaveCardsButton.addEventListener('click', saveCard);
+
