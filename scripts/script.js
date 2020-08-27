@@ -13,16 +13,24 @@ const profInput = document.querySelector('.popup__field_profession');
 const placeNameInput = document.querySelector('.popup__field_place-name');
 const placeLinkInput = document.querySelector('.popup__field_place-link');
 
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+}
+
 //1. Переменная с Функцией открытия попапа Редактирования профиля.
 const openProfilePopup = function() {
   nameInput.value = userName.textContent;
   profInput.value = userProfession.textContent;
-  popupProfile.classList.add('popup_opened');
+  openPopup(popupProfile);
 }
 
 //1.1 Переменная с Функцией закрытия попапа Редактирования профиля.
 const closeProfilePopup = function() {
-  popupProfile.classList.remove('popup_opened');
+  closePopup(popupProfile);
 }
 
 popupProfileOpenButton.addEventListener('click', openProfilePopup);
@@ -43,12 +51,12 @@ popupSaveProfileButton.addEventListener('click', editProfile);
 const openAddCardPopup = function() {
   placeNameInput.value = placeNameInput.textContent;
   placeLinkInput.value = placeLinkInput.textContent;
-  popupAddCard.classList.add('popup_opened');
+  openPopup(popupAddCard);;
 }
 
 //2.1 Функция закрытия попапа для добавления карточек.
 const closeAddCardPopup = function() {
-  popupAddCard.classList.remove('popup_opened');
+  closePopup(popupAddCard);
 }
 
 popupCardsOpenButton.addEventListener('click', openAddCardPopup);
@@ -106,7 +114,7 @@ function createCard(link, name) {
   const popupFullImage = popupImage.querySelector('.element__image-screen');
   const popupImageName = popupImage.querySelector('.element__image-name');
   cardImage.addEventListener('click', function(){
-    popupImage.classList.add('popup_opened');
+    openPopup(popupImage);
     popupFullImage.src = link;
     popupImageName.alt = 'Фото' + name;
     popupImageName.textContent = name;
@@ -114,7 +122,7 @@ function createCard(link, name) {
 
   const popupImageClose = document.querySelector('#screen-close-button');
   popupImageClose.addEventListener('click', function(){
-    popupImage.classList.remove('popup_opened');
+   closePopup(popupImage);
   });
 
   return elementCardTemplate;
