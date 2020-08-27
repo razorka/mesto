@@ -1,11 +1,11 @@
-const popupProfile = document.querySelector('#profile-popup');
-const popupAddCard = document.querySelector('#card-popup');
+const popupProfile = document.querySelector('.popup_profile');
+const popupAddCard = document.querySelector('.popup_card');
 const popupProfileOpenButton = document.querySelector('.profile__edit-button');
 const popupCardsOpenButton = document.querySelector('.profile__submit-button');
-const popupProfileCloseButton = document.querySelector('#profile-close-button');
-const popupSaveProfileButton = document.querySelector('#profile-save-button');
-const popupCardsCloseButton = document.querySelector('#cards-close-button');
-const popupSaveCardsButton = document.querySelector('#cards-save-button');
+const popupProfileCloseButton = document.querySelector('.popup__close-button_profile');
+const popupSaveProfileButton = document.querySelector('.popup__save-button_profile');
+const popupCardsCloseButton = document.querySelector('.popup__close-button_card');
+const popupSaveCardsButton = document.querySelector('.popup__save-button_card');
 const userName = document.querySelector('.profile__name');
 const userProfession = document.querySelector('.profile__profession');
 const nameInput = document.querySelector('.popup__field_name');
@@ -94,7 +94,7 @@ const initialCards = [
 
 //Функция создания карточки - в функцию мы в качестве параметров передаем переменные ссылки и имени из массива
 function createCard(link, name) {
-  const elementCardTemplate = document.querySelector('#element').content.cloneNode(true);
+  const elementCardTemplate = document.querySelector('.card').content.cloneNode(true);
   const cardImage = elementCardTemplate.querySelector('.element__image');
   cardImage.src = link;
   cardImage.alt = 'Фото' + name;
@@ -110,7 +110,7 @@ function createCard(link, name) {
     likeButton.classList.toggle('element__like-button_active');
   });
 
-  const popupImage = document.querySelector('#screen-image');
+  const popupImage = document.querySelector('.popup_image');
   const popupFullImage = popupImage.querySelector('.element__image-screen');
   const popupImageName = popupImage.querySelector('.element__image-name');
   cardImage.addEventListener('click', function(){
@@ -120,7 +120,7 @@ function createCard(link, name) {
     popupImageName.textContent = name;
   });
 
-  const popupImageClose = document.querySelector('#screen-close-button');
+  const popupImageClose = document.querySelector('.popup__close-button_image');
   popupImageClose.addEventListener('click', function(){
    closePopup(popupImage);
   });
