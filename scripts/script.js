@@ -1,17 +1,20 @@
 const popupProfile = document.querySelector('.popup_profile');
-const popupAddCard = document.querySelector('.popup_card');
 const popupProfileOpenButton = document.querySelector('.profile__edit-button');
-const popupCardsOpenButton = document.querySelector('.profile__submit-button');
 const popupProfileCloseButton = document.querySelector('.popup__close-button_profile');
 const popupSaveProfileButton = document.querySelector('.popup__save-button_profile');
-const popupCardsCloseButton = document.querySelector('.popup__close-button_card');
-const popupSaveCardsButton = document.querySelector('.popup__save-button_card');
-const userName = document.querySelector('.profile__name');
-const userProfession = document.querySelector('.profile__profession');
 const nameInput = document.querySelector('.popup__field_name');
 const profInput = document.querySelector('.popup__field_profession');
+const userName = document.querySelector('.profile__name');
+const userProfession = document.querySelector('.profile__profession');
+
+
+const popupAddCard = document.querySelector('.popup_card');
+const popupCardsOpenButton = document.querySelector('.profile__submit-button');
+const popupCardsCloseButton = document.querySelector('.popup__close-button_card');
+const popupSaveCardsButton = document.querySelector('.popup__save-button_card');
 const placeNameInput = document.querySelector('.popup__field_place-name');
 const placeLinkInput = document.querySelector('.popup__field_place-link');
+
 const elementList = document.querySelector('.elements__list');
 
 function openPopup(popup) {
@@ -54,43 +57,50 @@ function closeAddCardPopup() {
   closePopup(popupAddCard);
 }
 
-//Функция создания карточки - в функцию мы в качестве параметров передаем переменные ссылки и имени из массива
+function deleteCard(evt) {
+  evt.target.parentNode.remove();
+};
+
+function likeAction(evt){
+  evt.target.classList.toggle('element__like-button_active');
+};
+
+const popupImage = document.querySelector('.popup_image');
+const popupImageScreen = popupImage.querySelector('.element__image-screen');
+const popupImageName = popupImage.querySelector('.element__image-name');
+const popupImageCloseButton = document.querySelector('.popup__close-button_image');
+
+function closePopupImage() {
+  closePopup(popupImage);
+ };
+
+ function openFullImage(link, name){
+  openPopup(popupImage);
+  popupImageScreen.src = link;
+  popupImageName.alt = 'Фото' + name;
+  popupImageName.textContent = name;
+};
+
+
+//Функция создания карточки
 function createCard(link, name) {
   const card = document.querySelector('.card').content.cloneNode(true);
   const cardImage = card.querySelector('.element__image');
+  const cardName = card.querySelector('.element__name');
+  const cardDeleteButton = card.querySelector('.element__delete-button');
+  const cardLikeButton = card.querySelector('.element__like-button');
+
   cardImage.src = link;
   cardImage.alt = 'Фото' + name;
-  card.querySelector('.element__name').textContent = name;
+  cardName.textContent = name;
 
-  const deleteCardButton = card.querySelector('.element__delete-button');
-  deleteCardButton.addEventListener('click', function(evt) {
-    evt.target.parentNode.remove();
-  });
-
-  const likeButton = card.querySelector('.element__like-button');
-  likeButton.addEventListener('click', function(){
-    likeButton.classList.toggle('element__like-button_active');
-  });
-
+  cardDeleteButton.addEventListener('click', deleteCard);
+  cardLikeButton.addEventListener('click', likeAction);
   cardImage.addEventListener('click', openFullImage);
-
-  const popupImage = document.querySelector('.popup_image');
-  const popupFullImage = popupImage.querySelector('.element__image-screen');
-  const popupImageName = popupImage.querySelector('.element__image-name');
-   function openFullImage(){
-    openPopup(popupImage);
-    popupFullImage.src = link;
-    popupImageName.alt = 'Фото' + name;
-    popupImageName.textContent = name;
-  };
-
-  const popupImageClose = document.querySelector('.popup__close-button_image');
-  popupImageClose.addEventListener('click', function(){
-   closePopup(popupImage);
-  });
+  popupImageCloseButton.addEventListener('click', closePopupImage);
 
   return card;
-  }
+}
 
   //5. Создадим функцию стартового добавления карточек в блок.
 function initCards() {
