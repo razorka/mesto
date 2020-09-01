@@ -25,6 +25,7 @@ const popupImageCloseButton = document.querySelector('.popup__close-button_image
 
 const elementList = document.querySelector('.elements__list');
 
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
@@ -134,3 +135,36 @@ popupAddCardOpenButton.addEventListener('click', openAddCardPopup);
 popupAddCardCloseButton.addEventListener('click', closeAddCardPopup);
 popupAddCardSaveButton.addEventListener('click', saveCard);
 
+
+const profileForm = document.querySelector('.popup__container_profile');
+const profileFormInput = profileForm.querySelector('.popup__field');
+const profileFormError = profileForm.querySelector(`#${profileFormInput.id}-error`);
+
+
+const showError = (input) => {
+  input.classList.add('popup__field_type-error');
+  profileFormError.textContent = errorMessage;
+  profileFormError.classList.add('.popup__field_error-active');
+};
+
+const hideError = (input) => {
+  input.classList.remove('popup__field_type-error');
+};
+
+
+
+const checkInputValidity = () => {
+  if (!profileFormInput.validity.valid) {
+  showError(profileFormInput, profileFormInput.validationMessage);
+} else {
+  hideError(profileFormInput);
+}
+};
+
+nameInput.addEventListener('input', function () {
+  checkInputValidity();
+});
+
+profileForm.addEventListener('submit', function (evt) {
+  evt.preventDefault();
+});
