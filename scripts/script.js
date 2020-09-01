@@ -2,18 +2,26 @@ const popupProfile = document.querySelector('.popup_profile');
 const popupProfileOpenButton = document.querySelector('.profile__edit-button');
 const popupProfileCloseButton = document.querySelector('.popup__close-button_profile');
 const popupSaveProfileButton = document.querySelector('.popup__save-button_profile');
+
 const nameInput = document.querySelector('.popup__field_name');
 const profInput = document.querySelector('.popup__field_profession');
+
 const userName = document.querySelector('.profile__name');
 const userProfession = document.querySelector('.profile__profession');
 
 
 const popupAddCard = document.querySelector('.popup_card');
-const popupCardsOpenButton = document.querySelector('.profile__submit-button');
-const popupCardsCloseButton = document.querySelector('.popup__close-button_card');
-const popupSaveCardsButton = document.querySelector('.popup__save-button_card');
+const popupAddCardOpenButton = document.querySelector('.profile__submit-button');
+const popupAddCardCloseButton = document.querySelector('.popup__close-button_card');
+const popupAddCardSaveButton = document.querySelector('.popup__save-button_card');
+
 const placeNameInput = document.querySelector('.popup__field_place-name');
 const placeLinkInput = document.querySelector('.popup__field_place-link');
+
+const popupImage = document.querySelector('.popup_image');
+const popupImageScreen = popupImage.querySelector('.element__image-screen');
+const popupImageName = popupImage.querySelector('.element__image-name');
+const popupImageCloseButton = document.querySelector('.popup__close-button_image');
 
 const elementList = document.querySelector('.elements__list');
 
@@ -25,7 +33,7 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-//1. Переменная с Функцией открытия попапа Редактирования профиля.
+//1. Функция открытия попапа Редактирования профиля.
 function openProfilePopup() {
   nameInput.value = userName.textContent;
   profInput.value = userProfession.textContent;
@@ -65,20 +73,15 @@ function likeAction(evt){
   evt.target.classList.toggle('element__like-button_active');
 };
 
-const popupImage = document.querySelector('.popup_image');
-const popupImageScreen = popupImage.querySelector('.element__image-screen');
-const popupImageName = popupImage.querySelector('.element__image-name');
-const popupImageCloseButton = document.querySelector('.popup__close-button_image');
-
 function closePopupImage() {
   closePopup(popupImage);
  };
 
- function openFullImage(link, name){
+ function openFullImage(evt){
   openPopup(popupImage);
-  popupImageScreen.src = link;
-  popupImageName.alt = 'Фото' + name;
-  popupImageName.textContent = name;
+  popupImageScreen.src = evt.target.src;
+  popupImageScreen.alt = evt.target.alt;
+  popupImageName.textContent = evt.target.parentNode.querySelector('.element__name').textContent;
 };
 
 
@@ -127,7 +130,7 @@ function saveCard(evt) {
 popupProfileOpenButton.addEventListener('click', openProfilePopup);
 popupProfileCloseButton.addEventListener('click', closeProfilePopup);
 popupSaveProfileButton.addEventListener('click', editProfile);
-popupCardsOpenButton.addEventListener('click', openAddCardPopup);
-popupCardsCloseButton.addEventListener('click', closeAddCardPopup);
-popupSaveCardsButton.addEventListener('click', saveCard);
+popupAddCardOpenButton.addEventListener('click', openAddCardPopup);
+popupAddCardCloseButton.addEventListener('click', closeAddCardPopup);
+popupAddCardSaveButton.addEventListener('click', saveCard);
 
