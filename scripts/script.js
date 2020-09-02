@@ -136,41 +136,99 @@ popupAddCardCloseButton.addEventListener('click', closeAddCardPopup);
 popupAddCardSaveButton.addEventListener('click', saveCard);
 
 
-const profileForm = document.querySelector('.popup__container_profile');
-//const profileFormInput = profileForm.querySelector('.popup__field');
-//const profileFormError = profileForm.querySelector(`#${profileFormInput.id}-error`);
-const profileFormNameInputErrorMessage = profileForm.querySelector('.error__message');
-const profileFormNameInputMinLength = 2;
+
+const validationSettings = {
+  formSelector: '.popup__container',
+  fieldsetSelector: '.popup__fieldset',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__field_type_error',
+  errorClass: 'popup__field_error-visible',
+}
 
 
-//const showError = (input) => {
-//  input.classList.add('popup__field_type-error');
-//profileFormError.textContent = errorMessage;
-//  profileFormError.classList.add('.popup__field_error-active');
-//};
+function getErrorElement(form, field) {
+  return form.querySelector(`#${field.id}_error`);
+}
 
-//const hideError = (input) => {
-//  input.classList.remove('popup__field_type-error');
-//};
+function showInputError(form, field, errorText) {
+  const errorElement = getErrorElement(form, field);
+  field.classList.add(validationSettings.inputErrorClass);
+  errorElement.textContent = errorText;
+  errorElement.classList.add(validationSettings.errorClass);
+}
 
+function hideInputError(formElement, inputElement) {
+  const errorElement = getErrorElement(formElement, inputElement);
+  inputElement.classList.remove(validationSettings.inputErrorClass);
+  errorElement.textContent = '';
+  errorElement.classList.remove(validationSettings.errorClass);
+}
 
+function hasInvalidInput(formInputs) {
+  return formInputs.some(inputElement => {
+    return !inputElement.validity.valid;
+  })
+}
 
-//const checkInputValidity = () => {
-//  if (!profileFormInput.validity.valid) {
-//  showError(profileFormNameInput, profileFormNameInput.validationMessage);
-//} else {
-//  hideError(profileFormNameInput);
-//}
-//};
-
-profileFormNameInput.addEventListener('input', function () {
-  if(profileFormNameInput.value.length >= profileFormNameInputMinLength) {
-  profileFormSaveButton.removeAttribute('disabled', '');
-} else {
-    profileFormSaveButton.setAttribute('disabled', '');
+function checkInputValidity(formElement, inputElement) {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
   }
-});
+}
 
-profileForm.addEventListener('submit', function (evt) {
-  evt.preventDefault();
-});
+function toggleSubmitButtonState(formInputs, formSubmitButton) {
+  if (hasInvalidInput(formInputs)) {
+    formSubmitButton.disabled = true;
+    formSubmitButton.classList.add(validationSettings.inactiveButtonClass);
+  } else {
+    formSubmitButton.disabled = false;
+    formSubmitButton.classList.remove(validationSettings.inactiveButtonClass);
+  }
+}
+
+function inputEventListener(evt) {
+  const formElement = evt.target.form;
+  const inputElement = evt.srcElement;
+  const formInputs = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
+  const formSubmitButton = formElement.querySelector(validationSettings.submitButtonSelector);
+  checkInputValidity(formElement, inputElement);
+  toggleSubmitButtonState(formInputs, formSubmitButton);
+}
+
+function openCheckValidity(formElement) {
+  const formInputs = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
+  const formSubmitButton = formElement.querySelector(validationSettings.submitButtonSelector);
+  formInputs.forEach((inputElement) => {
+    checkInputValidity(formElement, inputElement);
+  });
+  toggleSubmitButtonState(formInputs, formSubmitButton);
+};
+
+function setEventListeners(formElement) {
+  const formInputs = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
+  const formSubmitButton = formElement.querySelector(validationSettings.submitButtonSelector);
+  toggleSubmitButtonState(formInputs, formSubmitButton);
+  formInputs.forEach(inputElement => {
+    inputElement.addEventListener('input', inputEventListener);
+  })
+}
+
+function enableValidation(settingsObject) {
+  const formsList = Array.from(document.querySelectorAll(settingsObject.formSelector));
+  formsList.forEach(formElement => {
+    formElement.addEventListener('submit', function (evt) {
+      evt.preventDefault();
+    })
+    const fieldsetList = Array.from(formElement.querySelectorAll(settingsObject.fieldsetSelector));
+    fieldsetList.forEach(fieldset => {
+      setEventListeners(fieldset);
+    })
+  })
+}
+
+enableValidation(validationSettings);
+

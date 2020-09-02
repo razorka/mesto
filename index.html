@@ -42,15 +42,20 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
+
     <section class="popup popup_profile">
        <form name="popup-container" class="popup__container popup__container_profile" novalidate>Редактировать профиль
-        <span class="error__message error__message_name"></span>
-        <button type="button" class="popup__close-button popup__close-button_profile" aria-label="Закрыть попап"></button>
-        <input type="text" id="email-input-error" name="name_information" placeholder="Имя" class="popup__field popup__field_name" required minlength="2" required maxlength="40">
-        <input type="text" name="profession_information" placeholder="О себе" class="popup__field popup__field_profession" required minlength="2" required maxlength="200">
-        <button type="submit" class="popup__save-button popup__save-button_profile" aria-label="Сохранить данные">Сохранить</button>
+          <fieldset class="popup__fieldset">
+            <button type="button" class="popup__close-button popup__close-button_profile" aria-label="Закрыть попап"></button>
+            <input type="text" id="popup__field_name" name="name_information" placeholder="Имя" class="popup__field popup__field_name" required minlength="2" maxlength="40">
+            <span span class='popup__field_error' id='popup__field_name_error'></span>
+            <input type="text" id="popup__field_profession" name="profession_information" placeholder="О себе" class="popup__field popup__field_profession" required minlength="2" maxlength="200">
+            <span span class='popup__field_error' id='popup__field_profession_error'></span>
+            <button type="submit" class="popup__save-button popup__save-button_profile" aria-label="Сохранить данные">Сохранить</button>
+          </fieldset>
       </form>
     </section>
+
     <section class="popup popup_card">
       <form name="popup-container-place" class="popup__container">Новое место
        <button type="button" class="popup__close-button popup__close-button_card" aria-label="Закрыть попап"></button>
@@ -59,6 +64,7 @@
        <button type="submit" class="popup__save-button popup__save-button_card" aria-label="Сохранить данные">Создать</button>
      </form>
    </section>
+
    <section class="popup popup_image">
     <form name="popup-image" class="popup__image">
      <button type="button" class="popup__close-button popup__close-button_image" aria-label="Закрыть попап"></button>
