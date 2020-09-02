@@ -1,10 +1,10 @@
 const popupProfile = document.querySelector('.popup_profile');
 const popupProfileOpenButton = document.querySelector('.profile__edit-button');
 const popupProfileCloseButton = document.querySelector('.popup__close-button_profile');
-const popupSaveProfileButton = document.querySelector('.popup__save-button_profile');
+const profileFormSaveButton = document.querySelector('.popup__save-button_profile');
 
-const nameInput = document.querySelector('.popup__field_name');
-const profInput = document.querySelector('.popup__field_profession');
+const profileFormNameInput = document.querySelector('.popup__field_name');
+const profileFormProfInput = document.querySelector('.popup__field_profession');
 
 const userName = document.querySelector('.profile__name');
 const userProfession = document.querySelector('.profile__profession');
@@ -36,8 +36,8 @@ function closePopup(popup) {
 
 //1. Функция открытия попапа Редактирования профиля.
 function openProfilePopup() {
-  nameInput.value = userName.textContent;
-  profInput.value = userProfession.textContent;
+  profileFormNameInput.value = userName.textContent;
+  profileFormProfInput.value = userProfession.textContent;
   openPopup(popupProfile);
 }
 
@@ -49,8 +49,8 @@ function closeProfilePopup() {
 //1.2 Функция редактирования и сохранения данных профиля.
 function editProfile(evt) {
   evt.preventDefault();
-  userName.textContent = nameInput.value;
-  userProfession.textContent = profInput.value;
+  userName.textContent = profileFormNameInput.value;
+  userProfession.textContent = profileFormProfInput.value;
   closeProfilePopup();
 }
 
@@ -130,39 +130,45 @@ function saveCard(evt) {
 
 popupProfileOpenButton.addEventListener('click', openProfilePopup);
 popupProfileCloseButton.addEventListener('click', closeProfilePopup);
-popupSaveProfileButton.addEventListener('click', editProfile);
+profileFormSaveButton.addEventListener('click', editProfile);
 popupAddCardOpenButton.addEventListener('click', openAddCardPopup);
 popupAddCardCloseButton.addEventListener('click', closeAddCardPopup);
 popupAddCardSaveButton.addEventListener('click', saveCard);
 
 
 const profileForm = document.querySelector('.popup__container_profile');
-const profileFormInput = profileForm.querySelector('.popup__field');
-const profileFormError = profileForm.querySelector(`#${profileFormInput.id}-error`);
+//const profileFormInput = profileForm.querySelector('.popup__field');
+//const profileFormError = profileForm.querySelector(`#${profileFormInput.id}-error`);
+const profileFormNameInputErrorMessage = profileForm.querySelector('.error__message');
+const profileFormNameInputMinLength = 2;
 
 
-const showError = (input) => {
-  input.classList.add('popup__field_type-error');
-  profileFormError.textContent = errorMessage;
-  profileFormError.classList.add('.popup__field_error-active');
-};
+//const showError = (input) => {
+//  input.classList.add('popup__field_type-error');
+//profileFormError.textContent = errorMessage;
+//  profileFormError.classList.add('.popup__field_error-active');
+//};
 
-const hideError = (input) => {
-  input.classList.remove('popup__field_type-error');
-};
+//const hideError = (input) => {
+//  input.classList.remove('popup__field_type-error');
+//};
 
 
 
-const checkInputValidity = () => {
-  if (!profileFormInput.validity.valid) {
-  showError(profileFormInput, profileFormInput.validationMessage);
+//const checkInputValidity = () => {
+//  if (!profileFormInput.validity.valid) {
+//  showError(profileFormNameInput, profileFormNameInput.validationMessage);
+//} else {
+//  hideError(profileFormNameInput);
+//}
+//};
+
+profileFormNameInput.addEventListener('input', function () {
+  if(profileFormNameInput.value.length >= profileFormNameInputMinLength) {
+  profileFormSaveButton.removeAttribute('disabled', '');
 } else {
-  hideError(profileFormInput);
-}
-};
-
-nameInput.addEventListener('input', function () {
-  checkInputValidity();
+    profileFormSaveButton.setAttribute('disabled', '');
+  }
 });
 
 profileForm.addEventListener('submit', function (evt) {
