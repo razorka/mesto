@@ -136,7 +136,7 @@ popupAddCardCloseButton.addEventListener('click', closeAddCardPopup);
 popupAddCardSaveButton.addEventListener('click', saveCard);
 
 
-
+// Определяем элементы объекта form для валидации
 const validationSettings = {
   formSelector: '.popup__container',
   fieldsetSelector: '.popup__fieldset',
@@ -147,7 +147,7 @@ const validationSettings = {
   errorClass: 'popup__field_error-visible',
 }
 
-
+//функция получения элемента с ошибкой
 function getErrorElement(form, field) {
   return form.querySelector(`#${field.id}_error`);
 }

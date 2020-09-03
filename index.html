@@ -44,25 +44,29 @@
     </footer>
 
     <section class="popup popup_profile">
-       <form name="popup-container" class="popup__container popup__container_profile" novalidate>Редактировать профиль
-          <fieldset class="popup__fieldset">
-            <button type="button" class="popup__close-button popup__close-button_profile" aria-label="Закрыть попап"></button>
-            <input type="text" id="popup__field_name" name="name_information" placeholder="Имя" class="popup__field popup__field_name" required minlength="2" maxlength="40">
-            <span span class='popup__field_error' id='popup__field_name_error'></span>
-            <input type="text" id="popup__field_profession" name="profession_information" placeholder="О себе" class="popup__field popup__field_profession" required minlength="2" maxlength="200">
-            <span span class='popup__field_error' id='popup__field_profession_error'></span>
-            <button type="submit" class="popup__save-button popup__save-button_profile" aria-label="Сохранить данные">Сохранить</button>
-          </fieldset>
+      <form name="popup-container" class="popup__container popup__container_profile" novalidate>Редактировать профиль
+        <button type="button" class="popup__close-button popup__close-button_profile" aria-label="Закрыть попап"></button>
+        <fieldset class="popup__fieldset popup__fieldset_profile">
+          <input type="text" id="popup__field_name" name="name_information" placeholder="Имя" class="popup__field popup__field_name" required minlength="2" maxlength="40">
+          <span span class='popup__field_error' id='popup__field_name_error'></span>
+          <input type="text" id="popup__field_profession" name="profession_information" placeholder="О себе" class="popup__field popup__field_profession" required minlength="2" maxlength="200">
+          <span span class='popup__field_error' id='popup__field_profession_error'></span>
+          <button type="submit" class="popup__save-button popup__save-button_profile" aria-label="Сохранить данные">Сохранить</button>
+        </fieldset>
       </form>
     </section>
 
     <section class="popup popup_card">
-      <form name="popup-container-place" class="popup__container">Новое место
-       <button type="button" class="popup__close-button popup__close-button_card" aria-label="Закрыть попап"></button>
-       <input type="text" name="place_name" placeholder="Название" class="popup__field popup__field_place-name">
-       <input type="text" name="place_link" placeholder="Ссылка на картинку" class="popup__field popup__field_place-link">
-       <button type="submit" class="popup__save-button popup__save-button_card" aria-label="Сохранить данные">Создать</button>
-     </form>
+      <form name="popup-container-place" class="popup__container popup__container_card" novalidate>Новое место
+        <button type="button" class="popup__close-button popup__close-button_card" aria-label="Закрыть попап"></button>
+        <fieldset class="popup__fieldset popup__fieldset_card">
+          <input type="text" id="popup__field_place-name" name="place_name" placeholder="Название" class="popup__field popup__field_place-name popup__field_type_error" required minlength="1" maxlength="30">
+          <span span class='popup__field_error popup__field_error-visible' id='popup__field_place-name_error'></span>
+          <input type="text" id="popup__field_place-link" name="place_link" placeholder="Ссылка на картинку" class="popup__field popup__field_place-link popup__field_type_error" required>
+          <span span class='popup__field_error popup__field_error-visible' id='popup__field_place-link_error'></span>
+          <button type="submit" class="popup__save-button popup__save-button_card" aria-label="Сохранить данные">Создать</button>
+        </fieldset>
+      </form>
    </section>
 
    <section class="popup popup_image">
