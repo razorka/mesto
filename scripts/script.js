@@ -136,7 +136,7 @@ popupAddCardCloseButton.addEventListener('click', closeAddCardPopup);
 popupAddCardSaveButton.addEventListener('click', saveCard);
 
 
-// Определяем элементы объекта form для валидации
+
 const validationSettings = {
   formSelector: '.popup__container',
   fieldsetSelector: '.popup__fieldset',
@@ -147,86 +147,96 @@ const validationSettings = {
   errorClass: 'popup__field_error-visible',
 }
 
-//функция получения элемента с ошибкой
-function getErrorElement(form, field) {
-  return form.querySelector(`#${field.id}_error`);
+//функция отображения нижнего красного подчеркивания полей и текстов ошибок
+function showInputError(formElement, inputElement, errorText) {
+  const errorElement = formElement.querySelector(`.${inputElement.id}_error`); //определяем span - в нем будет текст ошибки
+  inputElement.classList.add(validationSettings.inputErrorClass); //добавяем полю ввода нижнее красное подчеркивание
+  errorElement.classList.add(validationSettings.errorClass); //добавляем visible спану с текстом ошибки
+  errorElement.textContent = errorText; // текст ошибки в спане
 }
 
-function showInputError(form, field, errorText) {
-  const errorElement = getErrorElement(form, field);
-  field.classList.add(validationSettings.inputErrorClass);
-  errorElement.textContent = errorText;
-  errorElement.classList.add(validationSettings.errorClass);
-}
-
+//функция скрытия нижнего красного подчеркивания полей и текстов ошибок
 function hideInputError(formElement, inputElement) {
-  const errorElement = getErrorElement(formElement, inputElement);
+  const errorElement = formElement.querySelector(`.${inputElement.id}_error`);
   inputElement.classList.remove(validationSettings.inputErrorClass);
-  errorElement.textContent = '';
   errorElement.classList.remove(validationSettings.errorClass);
+  errorElement.textContent = '';
 }
 
-function hasInvalidInput(formInputs) {
-  return formInputs.some(inputElement => {
-    return !inputElement.validity.valid;
-  })
-}
-
-function checkInputValidity(formElement, inputElement) {
+// функция проверяет форму и inputElement на корректность введённых данных и показывает или скрывает сообщения об ошиках.
+const checkInputValidity = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
     hideInputError(formElement, inputElement);
   }
-}
+};
 
-function toggleSubmitButtonState(formInputs, formSubmitButton) {
-  if (hasInvalidInput(formInputs)) {
-    formSubmitButton.disabled = true;
-    formSubmitButton.classList.add(validationSettings.inactiveButtonClass);
+//функция «Есть ли здесь хотя бы одно поле, которое не прошло валидацию?».
+function hasInvalidInput(inputList) {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+  }
+
+//функция скрытия и показа кнопки сохранить в случае невалидированного поля
+function toggleButtonState(inputList, buttonElement) {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add(validationSettings.inactiveButtonClass);
   } else {
-    formSubmitButton.disabled = false;
-    formSubmitButton.classList.remove(validationSettings.inactiveButtonClass);
+    buttonElement.classList.remove(validationSettings.inactiveButtonClass);
   }
 }
 
-function inputEventListener(evt) {
-  const formElement = evt.target.form;
-  const inputElement = evt.srcElement;
-  const formInputs = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
-  const formSubmitButton = formElement.querySelector(validationSettings.submitButtonSelector);
-  checkInputValidity(formElement, inputElement);
-  toggleSubmitButtonState(formInputs, formSubmitButton);
-}
+//function inputEventListener(evt) {
+//  const formElement = evt.target.form;
+// const inputElement = evt.srcElement;
+//  const formInputs = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
+//  const formSubmitButton = formElement.querySelector(validationSettings.submitButtonSelector);
+//  checkInputValidity(formElement, inputElement);
+//  toggleButtonState(formInputs, formSubmitButton);
+//}
 
-function openCheckValidity(formElement) {
-  const formInputs = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
-  const formSubmitButton = formElement.querySelector(validationSettings.submitButtonSelector);
-  formInputs.forEach((inputElement) => {
-    checkInputValidity(formElement, inputElement);
-  });
-  toggleSubmitButtonState(formInputs, formSubmitButton);
-};
+//function openCheckValidity(formElement) {
+//  const formInputs = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
+//  const formSubmitButton = formElement.querySelector(validationSettings.submitButtonSelector);
+//  formInputs.forEach((inputElement) => {
+//    checkInputValidity(formElement, inputElement);
+// });
+//  toggleButtonState(formInputs, formSubmitButton);
+//};
 
+//функция слушатель - что происходит при вводе данных в поля
 function setEventListeners(formElement) {
-  const formInputs = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
-  const formSubmitButton = formElement.querySelector(validationSettings.submitButtonSelector);
-  toggleSubmitButtonState(formInputs, formSubmitButton);
-  formInputs.forEach(inputElement => {
-    inputElement.addEventListener('input', inputEventListener);
-  })
-}
+  const inputList = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
+  const buttonElement = formElement.querySelector(validationSettings.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement);
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', function () {
+      checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+  };
 
-function enableValidation(settingsObject) {
-  const formsList = Array.from(document.querySelectorAll(settingsObject.formSelector));
-  formsList.forEach(formElement => {
+//inputList.forEach(inputElement => {
+//  inputElement.addEventListener('input', inputEventListener);
+//});
+//}
+
+//функция валидации
+function enableValidation(form) {
+  const formList = Array.from(document.querySelectorAll(form.formSelector));
+  const fieldsetList = Array.from(document.querySelectorAll(form.fieldsetSelector));
+
+  formList.forEach(formElement => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
-    })
-    const fieldsetList = Array.from(formElement.querySelectorAll(settingsObject.fieldsetSelector));
+    });
+
     fieldsetList.forEach(fieldset => {
       setEventListeners(fieldset);
-    })
+    });
   })
 }
 
