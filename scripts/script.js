@@ -42,9 +42,8 @@ function closePopupByClick(evt) {
 //функция закрытия попапа при нажатии esc
 function escButtonDown(evt) {
   if (evt.key === escButton) {
-    if (evt.target.classList.contains('popup_opened')) {
-      closePopup(evt.target)
-    };
+    const openedPopup = document.querySelector('.popup_opened');
+      closePopup(openedPopup)
   };
 }
 
@@ -52,12 +51,13 @@ function escButtonDown(evt) {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   popup.addEventListener('click', closePopupByClick);
-  popup.addEventListener('keydown', escButtonDown);
+  document.addEventListener('keydown', escButtonDown);
 }
 
 //функция закрытия попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', escButtonDown);
 }
 
 
