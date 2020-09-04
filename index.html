@@ -60,10 +60,10 @@
       <form name="popup-container-place" class="popup__container popup__container_card" novalidate>Новое место
         <button type="button" class="popup__close-button popup__close-button_card" aria-label="Закрыть попап"></button>
         <fieldset class="popup__fieldset popup__fieldset_card">
-          <input type="text" id="popup__field_place-name" name="place_name" placeholder="Название" class="popup__field popup__field_place-name popup__field_type_error" required minlength="1" maxlength="30">
-          <span span class='popup__field_error popup__field_error-visible' id='popup__field_place-name_error'></span>
-          <input type="text" id="popup__field_place-link" name="place_link" placeholder="Ссылка на картинку" class="popup__field popup__field_place-link popup__field_type_error" required>
-          <span span class='popup__field_error popup__field_error-visible' id='popup__field_place-link_error'></span>
+          <input type="text" id="popup__field_place-name" name="place_name" placeholder="Название" class="popup__field popup__field_place-name" required minlength="1" maxlength="30">
+          <span span class='popup__field_error popup__field_place-name_error'></span>
+          <input type="url" id="popup__field_place-link" name="place_link" placeholder="Ссылка на картинку" class="popup__field popup__field_place-link" required>
+          <span span class='popup__field_error popup__field_place-link_error'></span>
           <button type="submit" class="popup__save-button popup__save-button_card" aria-label="Сохранить данные">Создать</button>
         </fieldset>
       </form>
@@ -79,6 +79,7 @@
    </form>
  </section>
     <script src="./scripts/initialCards.js"></script>
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/script.js"></script>
   </body>
 </html>
