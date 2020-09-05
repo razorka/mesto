@@ -1,13 +1,13 @@
 // определяем объект форму - из него в каждой форме сможем выбирать элеметы
 const validationSettings = {
-  formSelector: '.popup__container',
-  fieldsetSelector: '.popup__fieldset',
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__field_type_error',
-  errorClass: 'popup__field_error-visible',
-}
+  formSelector: ".popup__container",
+  fieldsetSelector: ".popup__fieldset",
+  inputSelector: ".popup__field",
+  submitButtonSelector: ".popup__save-button",
+  inactiveButtonClass: "popup__save-button_disabled",
+  inputErrorClass: "popup__field_type_error",
+  errorClass: "popup__field_error-visible",
+};
 
 //функция отображения нижнего красного подчеркивания полей и текстов ошибок
 function showInputError(formElement, inputElement, errorText) {
@@ -22,7 +22,7 @@ function hideInputError(formElement, inputElement) {
   const errorElement = formElement.querySelector(`.${inputElement.id}_error`);
   inputElement.classList.remove(validationSettings.inputErrorClass);
   errorElement.classList.remove(validationSettings.errorClass);
-  errorElement.textContent = '';
+  errorElement.textContent = "";
 }
 
 // функция проверяет форму и inputElement на корректность введённых данных и показывает или скрывает сообщения об ошиках.
@@ -39,14 +39,16 @@ function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   });
-  }
+}
 
 //функция скрытия и показа кнопки сохранить в случае невалидированного поля
 function toggleButtonState(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(validationSettings.inactiveButtonClass);
+    buttonElement.disabled = true;
   } else {
     buttonElement.classList.remove(validationSettings.inactiveButtonClass);
+    buttonElement.disabled = false;
   }
 }
 
@@ -56,12 +58,12 @@ function setEventListeners(formElement) {
   const buttonElement = formElement.querySelector(validationSettings.submitButtonSelector);
   toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', function () {
+    inputElement.addEventListener("input", function () {
       checkInputValidity(formElement, inputElement);
       toggleButtonState(inputList, buttonElement);
     });
   });
-  };
+}
 
 //функция проверки формы на валидность при открытии попапа
 function popupValidCheck(formElement) {
@@ -71,23 +73,24 @@ function popupValidCheck(formElement) {
     checkInputValidity(formElement, inputElement);
   });
   toggleButtonState(inputList, buttonElement);
-};
+}
 
 //функция валидации
 function enableValidation(form) {
   const formList = Array.from(document.querySelectorAll(form.formSelector));
-  const fieldsetList = Array.from(document.querySelectorAll(form.fieldsetSelector));
+  const fieldsetList = Array.from(
+    document.querySelectorAll(form.fieldsetSelector)
+  );
 
-  formList.forEach(formElement => {
-    formElement.addEventListener('submit', function (evt) {
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
     });
 
-    fieldsetList.forEach(fieldset => {
+    fieldsetList.forEach((fieldset) => {
       setEventListeners(fieldset);
     });
-  })
+  });
 }
 
 enableValidation(validationSettings);
-
