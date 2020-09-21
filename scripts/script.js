@@ -21,6 +21,23 @@ const popupAddCardSaveButton = document.querySelector(".popup__save-button_card"
 const placeNameInput = document.querySelector(".popup__field_place-name");
 const placeLinkInput = document.querySelector(".popup__field_place-link");
 
+// определяем объект форму - из него в каждой форме сможем выбирать элеметы
+const validationSettings = {
+  formSelector: ".popup__container",
+  fieldsetSelector: ".popup__fieldset",
+  inputSelector: ".popup__field",
+  submitButtonSelector: ".popup__save-button",
+  inactiveButtonClass: "popup__save-button_disabled",
+  inputErrorClass: "popup__field_type_error",
+  errorClass: "popup__field_error-visible",
+  buttonField: ".profile",
+  addCardButton: ".profile__submit-button",
+  editProfileButton: ".profile__edit-button"
+};
+
+const profileFormValidator = new FormValidator(validationSettings, popupProfile);
+const cardFormValidator = new FormValidator(validationSettings, popupAddCard);
+
 const escButton = "Escape";
 
 //функция закрытия попапа по клику на оверлэй
@@ -57,7 +74,6 @@ function openProfilePopup() {
   profileFormNameInput.value = userName.textContent;
   profileFormProfInput.value = userProfession.textContent;
   openPopup(popupProfile);
-  //popupValidCheck(popupProfile);
 }
 
 //1.1 Переменная с Функцией закрытия попапа Редактирования профиля.
@@ -78,7 +94,6 @@ function openAddCardPopup() {
   placeNameInput.value = placeNameInput.textContent;
   placeLinkInput.value = placeLinkInput.textContent;
   openPopup(popupAddCard);
-  //popupValidCheck(popupAddCard);
 }
 
 //2.1 Функция закрытия попапа для добавления карточек.
@@ -109,29 +124,8 @@ function saveCard(evt) {
   closeAddCardPopup();
 }
 
-
-// определяем объект форму - из него в каждой форме сможем выбирать элеметы
-const validationSettings = {
-  formSelector: ".popup__container",
-  fieldsetSelector: ".popup__fieldset",
-  inputSelector: ".popup__field",
-  submitButtonSelector: ".popup__save-button",
-  inactiveButtonClass: ".popup__save-button_disabled",
-  inputErrorClass: ".popup__field_type_error",
-  errorClass: ".popup__field_error-visible",
-  buttonField: ".profile",
-  addCardButton: ".profile__submit-button",
-  editProfileButton: ".profile__edit-button"
-};
-
-const setFormValidation = (settings, formElement) => {
-  const formValidator = new FormValidator(settings, formElement);
-  formValidator.enableValidation();
-}
-
-setFormValidation(validationSettings, popupProfile);
-setFormValidation(validationSettings, popupAddCard);
-
+profileFormValidator.enableValidation();
+cardFormValidator.enableValidation();
 
 popupProfileOpenButton.addEventListener("click", openProfilePopup);
 popupProfileCloseButton.addEventListener("click", closeProfilePopup);
