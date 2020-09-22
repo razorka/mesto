@@ -1,12 +1,4 @@
-const popupImage = document.querySelector(".popup_image");
-const popupImageScreen = popupImage.querySelector(".element__image-screen");
-const popupImageName = popupImage.querySelector(".element__image-name");
-const popupImageCloseButton = document.querySelector(".popup__close-button_image");
-
-//const elementList = document.querySelector(".elements__list");
-
-const escButton = "Escape";
-
+import {openPopup, closePopup, popupImage, popupImageScreen, popupImageName, popupImageCloseButton} from './utils.js';
 class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
@@ -19,37 +11,19 @@ class Card {
     return cardElement;
   }
 
-  //функция закрытия попапа по клику на оверлэй
-  _closePopupByClick(evt) {
-    if (evt.target.classList.contains("popup_opened")) {
-      popupImage.classList.remove("popup_opened");
-    }
-  }
-
-  //функция закрытия попапа при нажатии esc
-  _escButtonDown(evt) {
-    if (evt.key === escButton) {
-      const openedPopup = document.querySelector(".popup_opened");
-      popupImage.classList.remove("popup_opened");
-    }
-  }
-
   _handleOpenPopup() {
-    popupImage.classList.add("popup_opened");
+    openPopup(popupImage);
     popupImageScreen.src = this._link;
     popupImageScreen.alt = "Фото" + this._name;
     popupImageName.textContent = this._name;
-    popupImage.addEventListener("click", this._closePopupByClick);
-    document.addEventListener("keydown", this._escButtonDown);
   }
 
   _handleClosePopup() {
     popupImageScreen.src = "";
     popupImageScreen.alt = "";
     popupImageName.textContent = "";
-    popupImage.classList.remove('popup_opened');
-    popupImage.removeEventListener("click", this._closePopupByClick);
-    document.removeEventListener("keydown", this._escButtonDown);
+    closePopup(popupImage);
+
   }
 
   _deleteCard(evt) {

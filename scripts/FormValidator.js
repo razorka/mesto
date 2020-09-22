@@ -10,7 +10,6 @@ class FormValidator {
 
   //функция отображения нижнего красного подчеркивания полей и текстов ошибок
   _showInputError(inputElement, errorText, errorElement) {
-    //const errorElement = this._formElement.querySelector(`.${inputElement.id}_error`); //определяем span - в нем будет текст ошибки
     inputElement.classList.add(this._validationSettings.inputErrorClass); //добавяем полю ввода нижнее красное подчеркивание
     errorElement.classList.add(this._validationSettings.errorClass); //добавляем visible спану с текстом ошибки
     errorElement.textContent = errorText; // текст ошибки в спане
@@ -18,7 +17,6 @@ class FormValidator {
 
   //функция скрытия нижнего красного подчеркивания полей и текстов ошибок
   _hideInputError(inputElement, errorElement) {
-    //const errorElement = this._formElement.querySelector(`.${inputElement.id}_error`);
     inputElement.classList.remove(this._validationSettings.inputErrorClass);
     errorElement.classList.remove(this._validationSettings.errorClass);
     errorElement.textContent = "";
@@ -54,7 +52,7 @@ class FormValidator {
   }
 
   //функция проверки формы на валидность при открытии попапа
-  _popupValidCheck(formElement, buttonElement) {
+  resetForm(formElement, buttonElement) {
     const buttonsField = document.querySelector(this._validationSettings.buttonField);
     buttonsField.addEventListener('click', (evt) => {
       if (evt.target.classList.contains(this._validationSettings.addCardButton) || evt.target.classList.contains(this._validationSettings.editProfileButton)) {
@@ -82,7 +80,7 @@ class FormValidator {
         this._inputEventListener(evt, inputList, buttonElement);
       });
     });
-    this._popupValidCheck(inputList, buttonElement);
+    this.resetForm(inputList, buttonElement);
   }
 
   //функция валидации
