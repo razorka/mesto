@@ -1,4 +1,3 @@
-import {openPopup, closePopup, popupImage, popupImageScreen, popupImageName, popupImageCloseButton} from './utils.js';
 class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
@@ -66,3 +65,5 @@ class Card {
 }
 
 export {Card};
+
+import {openPopup, closePopup, popupImage, popupImageScreen, popupImageName, popupImageCloseButton} from './utils.js';
