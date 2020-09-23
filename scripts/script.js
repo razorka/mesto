@@ -48,7 +48,7 @@ function openProfilePopup() {
   profileFormNameInput.value = userName.textContent;
   profileFormProfInput.value = userProfession.textContent;
   openPopup(popupProfile);
-  //profileFormValidator.resetForm();
+  profileFormValidator.resetForm();
 }
 
 //1.2 Функция редактирования и сохранения данных профиля.
@@ -64,7 +64,7 @@ function openAddCardPopup() {
   placeNameInput.value = "";
   placeLinkInput.value = "";
   openPopup(popupAddCard);
-  //cardFormValidator.resetForm();
+  cardFormValidator.resetForm();
 }
 
 
