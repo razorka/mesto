@@ -6,7 +6,8 @@
   font-style: normal;
   font-weight: normal;
   font-family: "Inter", Arial, Helvetica, sans-serif;
-  font-size: 0.95vw;  /*12px*/
+  font-size: 12px;  /*12px*/
   line-height: 1.25;
   color: #FF0000;
+  display: inline-block
 }

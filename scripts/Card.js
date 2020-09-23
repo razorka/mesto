@@ -29,7 +29,7 @@ class Card {
 
   _deleteCard() {
     this._element.remove();
-    this._element = "";
+    this._element = null;
   }
 
   _likeAction(evt) {
