@@ -1,3 +1,5 @@
+import {openPopup, closePopup, popupImage, popupImageScreen, popupImageName, popupImageCloseButton} from './utils.js';
+
 class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
@@ -25,8 +27,9 @@ class Card {
 
   }
 
-  _deleteCard(evt) {
-    evt.target.parentNode.remove();
+  _deleteCard() {
+    this._element.remove();
+    this._element = "";
   }
 
   _likeAction(evt) {
@@ -53,11 +56,12 @@ class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    const elementName = this._element.querySelector('.element__name');
     this._setEventListeners();
 
     this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__name').textContent = this._name;
-    this._element.querySelector('.element__name').alt = "Фото" + this._name;
+    elementName.textContent = this._name;
+    elementName.alt = "Фото" + this._name;
 
     return this._element;
   }
@@ -66,4 +70,4 @@ class Card {
 
 export {Card};
 
-import {openPopup, closePopup, popupImage, popupImageScreen, popupImageName, popupImageCloseButton} from './utils.js';
+

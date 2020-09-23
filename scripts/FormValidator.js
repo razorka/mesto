@@ -52,7 +52,7 @@ class FormValidator {
     }
   }
 
-  //функция проверки формы на валидность при открытии попапа -совсем уже голова не варит надо разобраться
+  //функция проверки формы на валидность при открытии попапа
   resetForm() {
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement)

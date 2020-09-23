@@ -85,7 +85,7 @@ function saveCard(evt) {
   const card = new Card(newElement, '.card');
   const cardElement = card.generateCard();
 
-  document.querySelector('.elements__list').prepend(cardElement)
+  elementList.prepend(cardElement)
 
 
   closePopup(popupAddCard);
