@@ -59,7 +59,7 @@ function editProfile(evt) {
   closePopup(popupProfile);
 }
 
-//2 Функция открытия попапа для добавления карточек
+//2 Функция открытия попапа добавления карточек
 function openAddCardPopup() {
   placeNameInput.value = "";
   placeLinkInput.value = "";
