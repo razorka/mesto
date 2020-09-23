@@ -1,6 +1,6 @@
 import {openPopup, closePopup} from './utils.js';
 import {initialCards} from './initialCards.js';
-import {Card} from './Card.js';
+import {Card} from './Cards.js';
 import {FormValidator} from './FormValidator.js';
 
 const popupProfile = document.querySelector(".popup_profile");
