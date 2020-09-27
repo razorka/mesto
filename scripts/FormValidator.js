@@ -24,7 +24,7 @@ class FormValidator {
   }
 
   // функция проверяет форму и inputElement на корректность введённых данных и показывает или скрывает сообщения об ошиках.
-  _checkInputValidity = (inputElement) => {
+  _checkInputValidity(inputElement) {
     this._errorElement = this._findErrorElement(inputElement);
 
     if (!inputElement.validity.valid) {

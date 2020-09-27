@@ -14,7 +14,7 @@
 
 .popup__close-button::before, .popup__close-button::after {
   position: absolute;
-  content: ' ';
+  content: '';
   height: 41px;
   width: 5px;
   background-color: white;

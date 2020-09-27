@@ -15,7 +15,7 @@
 
 .profile__submit-button::before, .profile__submit-button::after {
   position: absolute;
-  content: ' ';
+  content: '';
   height: 22px;
   width: 3px;
   background-color: white;

@@ -1,5 +1,5 @@
 .element__like-button {
-  background: url(../../../images/elements_like-button.svg) center no-repeat;
+ background: url(../../../images/elements_like-button.svg) center no-repeat;
   background-size: contain;
   width: 21px;
   height: 21px;
@@ -10,8 +10,4 @@
   cursor: pointer;
   opacity: 0.6;
   transition: 0.5s linear;
-}
-
-.element__like-button_active {
-  background: url(../../../../images/like-button_active.svg) center no-repeat;
 }
