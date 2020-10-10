@@ -65,7 +65,7 @@ const newCard = (data) => {
   return card;
 }
 
-// отрисовываем все карточки из массива.
+//добавляем все карточки из массива.
 const cardList = new Section({
   items: initialCards,
   renderer: (data) => {
