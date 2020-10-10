@@ -1,6 +1,5 @@
 import "./index.css";
 
-//import {openPopup, closePopup} from '../scripts/utils.js';
 //import {Popup} from '../scripts/Popup.js';
 import {initialCards} from '../scripts/initialCards.js';
 import {Section} from '../scripts/Section.js';
@@ -11,7 +10,6 @@ import {PopupWithForm} from '../scripts/PopupWithForm.js';
 import {PopupWithImage} from '../scripts/PopupWithImage.js';
 
 const popupProfile = document.querySelector(".popup_profile");
-//const formProfile = document.querySelector(".popup__container_profile");
 const popupProfileOpenButton = document.querySelector(".profile__edit-button");
 //const popupProfileCloseButton = document.querySelector(".popup__close-button_profile");
 
@@ -95,10 +93,9 @@ function submitCallbackCard (data) {
     const cardElement = card.generateCard();
     cardList.addItem(cardElement);
     addCardPopup.close();
-  };
+};
 
-
-  //получаем информацию о пользователе
+//получаем информацию о пользователе
 const userInfo = new UserInfo({ userName, userProfession });
 
 //слушатель кнопки открытия попапа с функцией заполнения данных формы
