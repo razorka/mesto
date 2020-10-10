@@ -1,30 +1,13 @@
-import {openPopup, closePopup, popupImage, popupImageScreen, popupImageName, popupImageCloseButton} from './utils.js';
-
 class Card {
-  constructor(data, cardSelector) {
-    this._name = data.name;
-    this._link = data.link;
+  constructor(data, cardSelector,  {handleCardClick}) {
+    this._data = data;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
    _getTemplate() {
     const cardElement = document.querySelector(this._cardSelector).content.querySelector('.element').cloneNode(true);
     return cardElement;
-  }
-
-  _handleOpenPopup() {
-    openPopup(popupImage);
-    popupImageScreen.src = this._link;
-    popupImageScreen.alt = "Фото" + this._name;
-    popupImageName.textContent = this._name;
-  }
-
-  _handleClosePopup() {
-    popupImageScreen.src = "";
-    popupImageScreen.alt = "";
-    popupImageName.textContent = "";
-    closePopup(popupImage);
-
   }
 
   _deleteCard() {
@@ -37,9 +20,9 @@ class Card {
   }
 
   _setEventListeners() {
-    popupImageCloseButton.addEventListener('click', () => {
-      this._handleClosePopup()
-    });
+    this._elementPhoto.addEventListener ('click', () => {
+      this._handleCardClick(this._data);
+      });
 
     this._element.addEventListener('click', (evt) => {
       if (evt.target.classList.contains('element__delete-button')) {
@@ -48,20 +31,17 @@ class Card {
       else if (evt.target.classList.contains('element__like-button')){
       this._likeAction(evt)
       }
-      else if (evt.target.classList.contains('element__image')){
-      this._handleOpenPopup(evt)
-      }
     });
   }
 
   generateCard() {
     this._element = this._getTemplate();
-    const elementName = this._element.querySelector('.element__name');
+    this._elementName = this._element.querySelector('.element__name');
+    this._elementPhoto = this._element.querySelector('.element__image');
+    this._elementPhoto.src = this._data.place_link;
+    this._elementPhoto.alt = "Фото" + this._data.place_name;
+    this._elementName.textContent = this._data.place_name;
     this._setEventListeners();
-
-    this._element.querySelector('.element__image').src = this._link;
-    elementName.textContent = this._name;
-    elementName.alt = "Фото" + this._name;
 
     return this._element;
   }
@@ -69,5 +49,3 @@ class Card {
 }
 
 export {Card};
-
-
