@@ -88,17 +88,17 @@ popupAddCardOpenButton.addEventListener('click', () => {
 
 
 //добавление карточки с данными из полей попапа
-const addCardPopup = new PopupWithForm(popupAddCard, {
-  submit: (data) => {
-    const card = newCard(data);
+const addCardPopup = new PopupWithForm(popupAddCard, submitCallbackCard);
+
+function submitCallbackCard (data) {
+  const card = newCard(data);
     const cardElement = card.generateCard();
     cardList.addItem(cardElement);
     addCardPopup.close();
-  }
-})
+  };
 
 
-//получаем информацию о пользователе
+  //получаем информацию о пользователе
 const userInfo = new UserInfo({ userName, userProfession });
 
 //слушатель кнопки открытия попапа с функцией заполнения данных формы
@@ -111,12 +111,13 @@ popupProfileOpenButton.addEventListener('click', () => {
 })
 
 //сохранение введенных пользователем данных
-const userInfoPopup = new PopupWithForm(popupProfile, {
-  submit: (data) => {
-    userInfo.setUserInfo(data);
-    userInfoPopup.close();
-  }
-})
+const userInfoPopup = new PopupWithForm(popupProfile, submitCallback);
+
+function submitCallback (data) {
+  userInfo.setUserInfo(data);
+  userInfoPopup.close();
+};
+
 
 profileFormValidator.enableValidation();
 cardFormValidator.enableValidation();
