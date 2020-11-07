@@ -36,9 +36,9 @@
       <form type="submit" name="popup-container" class="popup__container popup__container_profile" novalidate>Редактировать профиль
         <button type="button" class="popup__close-button popup__close-button_profile" aria-label="Закрыть попап"></button>
         <fieldset class="popup__fieldset popup__fieldset_profile">
-          <input type="text" id="popup__field_name" name="name" placeholder="Имя" class="popup__field popup__field_name" required minlength="2" maxlength="40">
+          <input type="text" id="popup__field_name" name="userName" placeholder="Имя" class="popup__field popup__field_name" required minlength="2" maxlength="40">
           <span span class='popup__field_error popup__field_name_error'></span>
-          <input type="text" id="popup__field_profession" name="profession" placeholder="О себе" class="popup__field popup__field_profession" required minlength="2" maxlength="200">
+          <input type="text" id="popup__field_profession" name="userProfession" placeholder="О себе" class="popup__field popup__field_profession" required minlength="2" maxlength="200">
           <span span class='popup__field_error popup__field_profession_error'></span>
           <button type="submit" class="popup__save-button popup__save-button_profile" aria-label="Сохранить данные">Сохранить</button>
         </fieldset>
@@ -49,9 +49,9 @@
       <form type="submit" name="popup-container-place" class="popup__container popup__container_card" novalidate>Новое место
         <button type="button" class="popup__close-button popup__close-button_card" aria-label="Закрыть попап"></button>
         <fieldset class="popup__fieldset popup__fieldset_card">
-          <input type="text" id="popup__field_place-name" name="place_name" placeholder="Название" class="popup__field popup__field_place-name" required minlength="1" maxlength="30">
+          <input type="text" id="popup__field_place-name" name="name" placeholder="Название" class="popup__field popup__field_place-name" required minlength="1" maxlength="30">
           <span span class='popup__field_error popup__field_place-name_error'></span>
-          <input type="url" id="popup__field_place-link" name="place_link" placeholder="Ссылка на картинку" class="popup__field popup__field_place-link" required>
+          <input type="url" id="popup__field_place-link" name="link" placeholder="Ссылка на картинку" class="popup__field popup__field_place-link" required>
           <span span class='popup__field_error popup__field_place-link_error'></span>
           <button type="submit" class="popup__save-button popup__save-button_card" aria-label="Сохранить данные">Создать</button>
         </fieldset>
@@ -67,13 +67,24 @@
         </figure>
       </form>
     </section>
+
+    <section class="popup popup_confirm">
+      <form name="popup-confirm" class="popup__container popup__confirm">Вы уверены?
+        <button type="button" class="popup__close-button popup__close-button_confirm" aria-label="Закрыть попап"></button>
+        <button class="popup__save-button popup__save-button_confirm">Да</button>
+      </form>
+    </section>
+
     <template class="card">
       <div class="element">
         <button class="element__delete-button"></button>
         <img src="#" class="element__image" alt="#">
          <div class="element__info">
             <h2 class="element__name"></h2>
-            <button class="element__like-button"></button>
+            <div class="element__like-box">
+              <button class="element__like-button"></button>
+              <span class ="element__like-numbers">0</span>
+            </div>
          </div>
       </div>
    </template>
