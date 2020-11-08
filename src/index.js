@@ -31,7 +31,10 @@ const popupAddCardOpenButton = document.querySelector(".profile__submit-button")
 //const placeNameInput = document.querySelector(".popup__field_place-name");
 //const placeLinkInput = document.querySelector(".popup__field_place-link");
 
-const elementList = document.querySelector(".elements__list")
+const elementList = document.querySelector(".elements__list");
+
+const popupAvatar = document.querySelector(".popup_avatar");
+const avatarEditButton = document.querySelector(".profile__avatar-edit-button")
 
 // определяем объект форму - из него в каждой форме сможем выбирать элеметы
 const validationSettings = {
@@ -48,7 +51,6 @@ const validationSettings = {
 };
 
 const popupImage = document.querySelector(".popup_image");
-
 const popupConfirm = document.querySelector(".popup_confirm");
 
 let tempCard = null;
@@ -56,6 +58,7 @@ let ownerId = null;
 
 const profileFormValidator = new FormValidator(validationSettings, popupProfile);
 const cardFormValidator = new FormValidator(validationSettings, popupAddCard);
+const avatarFormValidator = new FormValidator(validationSettings, popupAvatar);
 
 //переменная открытия попапа с фото
 const photoPopup = new PopupWithImage(popupImage);
@@ -73,6 +76,7 @@ const cardList = new Section({
     }
   }, elementList
 );
+
 const api = new API({
   url: 'https://mesto.nomoreparties.co/v1/cohort-17',
   headers: {
@@ -143,10 +147,6 @@ function submitConfirmDelete (data) {
 }
 
 
-
-
-
-
 //слушатель кнопки открытия попапа добавлени карточек с фото
 popupAddCardOpenButton.addEventListener('click', () => {
   addCardPopup.open();
@@ -157,7 +157,7 @@ popupAddCardOpenButton.addEventListener('click', () => {
 //добавление карточки с данными из полей попапа
 const addCardPopup = new PopupWithForm(popupAddCard, submitCallbackCard);
 
-function submitCallbackCard (data) {
+function submitCallbackCard(data) {
   api.postCard(data)
   .then((res) => {
   const card = newCard(res);
@@ -171,6 +171,31 @@ function submitCallbackCard (data) {
     addCardPopup.close();
   })
 };
+
+const popupAvatarChange = new PopupWithForm(popupAvatar, submitCallbackAvatar);
+
+  function submitCallbackAvatar(data) {
+    //popupAvatarChange.renderLoading(true);
+    api.setUserAvatar(data)
+      .then((res) => {
+        userInfo.setUserAvatar(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+       // popupAvatarChange.renderLoading(false);
+       popupAvatarChange.close();
+      })
+  }
+
+avatarEditButton.addEventListener('click', () => {
+  popupAvatarChange.open();
+  popupAvatarChange.setEventListeners();
+})
+
+
+
 
 //слушатель кнопки открытия попапа с функцией заполнения данных формы
 popupProfileOpenButton.addEventListener('click', () => {
@@ -189,6 +214,6 @@ function submitCallback (data) {
   userInfoPopup.close();
 };
 
-
 profileFormValidator.enableValidation();
 cardFormValidator.enableValidation();
+avatarFormValidator.enableValidation();

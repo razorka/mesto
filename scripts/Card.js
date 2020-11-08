@@ -19,11 +19,6 @@ class Card {
     this._element = null;
   }
 
- // _likeAction(evt) {
- //   evt.target.classList.toggle("element__like-button_active");
- // }
-
-
   _likeOn(data) {
     this._likeButton.classList.add("element__like-button_active");
     this._setLike(data);
@@ -68,16 +63,6 @@ class Card {
         this._likeOn(this._data);
       }
     });
-
-
-     // this._element.addEventListener('click', (evt) => {
-    //  if (evt.target.classList.contains('element__delete-button')) {
-    //    this._deleteCard(evt)
-    //  }
-    //  else if (evt.target.classList.contains('element__like-button')){
-    //  this._likeAction(evt)
-    //  }
-   // });
   }
 
   generateCard() {
@@ -87,14 +72,14 @@ class Card {
     this._likeButton = this._element.querySelector('.element__like-button');
     this._photoLikeQuantity = this._element.querySelector('.element__like-numbers');
     this._deleteButton = this._element.querySelector('.element__delete-button');
+    this._elementPhoto.src = this._data.link;
+    this._elementPhoto.alt = "Фото" + this._data.name;
+    this._elementName.textContent = this._data.name;
     this._element.setAttribute('id', `a${this._data._id}`);
     this.likeQuantity(this._data)
     this._setEventListeners();
     this._checkUserCard();
     this._checkUserLike();
-    this._elementPhoto.src = this._data.link;
-    this._elementPhoto.alt = "Фото" + this._data.name;
-    this._elementName.textContent = this._data.name;
 
     return this._element;
   }

@@ -30,16 +30,6 @@ export class API {
     return Promise.all([this.getUserInfo(), this.getCards()]);
   }
 
-  setUserAvatar(data) {
-    return fetch(`${this._url}/users/me/avatar`, {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        avatar: data.avatar
-      })
-    }).then(this._resStatus)
-  }
-
   deleteLike(data) {
     return fetch(`${this._url}/cards/likes/${data._id}`, {
       method: 'DELETE',
@@ -79,6 +69,16 @@ export class API {
       body: JSON.stringify({
         name: data.name,
         about: data.about
+      })
+    }).then(this._resStatus)
+  }
+
+  setUserAvatar(data) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.avatar
       })
     }).then(this._resStatus)
   }

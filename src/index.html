@@ -12,7 +12,10 @@
     <main class="content">
       <section class="profile">
         <div class="profile__main-block">
-          <img src="../images/profile_avatar.png" alt="Аватар" class="profile__avatar">
+          <div class="profile__avatar-box">
+            <img src="#" alt="Аватар" class="profile__avatar">
+            <button class="profile__avatar-edit-button" aria-label="Обновить аватар"></button>
+          </div>
           <div class="profile__data">
             <div class="profile__name-block">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -45,14 +48,25 @@
       </form>
     </section>
 
+    <section class="popup popup_avatar">
+      <form name="popup-container-avatar" class="popup__container popup__container_avatar" novalidate>Обновить аватар
+        <button type="button" class="popup__close-button popup__close-button_avatar" aria-label="закрыть попап"></button>
+        <fieldset class="popup__fieldset popup__fieldset_avatar">
+            <input type="url" id="popup__field_avatar-link" name="avatar" placeholder="Ссылка на картинку" class="popup__field popup__field_avatar-link" required>
+            <span class='popup__field_error popup__field_avatar-link_error'></span>
+            <button type="submit" class="popup__save-button popup__save-button_avatar" aria-label="Сохранить данные">Сохранить</button>
+          </fieldset>
+      </form>
+    </section>
+
     <section class="popup popup_card">
       <form type="submit" name="popup-container-place" class="popup__container popup__container_card" novalidate>Новое место
         <button type="button" class="popup__close-button popup__close-button_card" aria-label="Закрыть попап"></button>
         <fieldset class="popup__fieldset popup__fieldset_card">
           <input type="text" id="popup__field_place-name" name="name" placeholder="Название" class="popup__field popup__field_place-name" required minlength="1" maxlength="30">
-          <span span class='popup__field_error popup__field_place-name_error'></span>
+          <span class='popup__field_error popup__field_place-name_error'></span>
           <input type="url" id="popup__field_place-link" name="link" placeholder="Ссылка на картинку" class="popup__field popup__field_place-link" required>
-          <span span class='popup__field_error popup__field_place-link_error'></span>
+          <span class='popup__field_error popup__field_place-link_error'></span>
           <button type="submit" class="popup__save-button popup__save-button_card" aria-label="Сохранить данные">Создать</button>
         </fieldset>
       </form>
