@@ -52,6 +52,7 @@ const validationSettings = {
 
 const popupImage = document.querySelector(".popup_image");
 const popupConfirm = document.querySelector(".popup_confirm");
+//const popupInfo = document.querySelector(".popup_profile")
 
 let tempCard = null;
 let ownerId = null;
@@ -129,6 +130,24 @@ const newCard = (data) => {
   return card;
 }
 
+const popupProfileInfo = new PopupWithForm(popupProfile, submitCallbackProfile)
+
+function submitCallbackProfile(data) {
+    popupProfileInfo.renderLoading(true);
+    api.setUserInfo(data)
+      .then((res) => {
+        userInfo.setUserInfo(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        popupProfileInfo.renderLoading(false);
+        popupProfileInfo.close();
+      })
+}
+
+
 
 const popupWithConfirm = new PopupWithConfirm(popupConfirm, submitConfirmDelete)
 
@@ -158,6 +177,7 @@ popupAddCardOpenButton.addEventListener('click', () => {
 const addCardPopup = new PopupWithForm(popupAddCard, submitCallbackCard);
 
 function submitCallbackCard(data) {
+  addCardPopup.renderLoading(true);
   api.postCard(data)
   .then((res) => {
   const card = newCard(res);
@@ -168,6 +188,7 @@ function submitCallbackCard(data) {
     console.log(err);
   })
   .finally(() => {
+    addCardPopup.renderLoading(false);
     addCardPopup.close();
   })
 };
@@ -175,7 +196,7 @@ function submitCallbackCard(data) {
 const popupAvatarChange = new PopupWithForm(popupAvatar, submitCallbackAvatar);
 
   function submitCallbackAvatar(data) {
-    //popupAvatarChange.renderLoading(true);
+    popupAvatarChange.renderLoading(true);
     api.setUserAvatar(data)
       .then((res) => {
         userInfo.setUserAvatar(res);
@@ -184,7 +205,7 @@ const popupAvatarChange = new PopupWithForm(popupAvatar, submitCallbackAvatar);
         console.log(err);
       })
       .finally(() => {
-       // popupAvatarChange.renderLoading(false);
+       popupAvatarChange.renderLoading(false);
        popupAvatarChange.close();
       })
   }
@@ -199,20 +220,10 @@ avatarEditButton.addEventListener('click', () => {
 
 //слушатель кнопки открытия попапа с функцией заполнения данных формы
 popupProfileOpenButton.addEventListener('click', () => {
-  const userData = userInfo.getUserInfo();
-  profileFormNameInput.value = userData.name;
-  profileFormProfInput.value = userData.profession;
-  userInfoPopup.open();
-  userInfoPopup.setEventListeners();
+
+  popupProfileInfo.open();
+  popupProfileInfo.setEventListeners();
 })
-
-//сохранение введенных пользователем данных
-const userInfoPopup = new PopupWithForm(popupProfile, submitCallback);
-
-function submitCallback (data) {
-  userInfo.setUserInfo(data);
-  userInfoPopup.close();
-};
 
 profileFormValidator.enableValidation();
 cardFormValidator.enableValidation();

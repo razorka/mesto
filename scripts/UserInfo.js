@@ -8,7 +8,7 @@ export class UserInfo {
   getUserInfo() {
     this._user = {
       name: this._userName.textContent,
-      about: this._userProfession.textContent
+      profession: this._userProfession.textContent
     };
     return this._user;
   }
